@@ -1,3 +1,5 @@
+-- Semua command SQL yang ada di file ini akan dijalankan ketika container MySQL pertama kali dijalankan
+
 CREATE DATABASE IF NOT EXISTS wordpressweb;
 CREATE DATABASE IF NOT EXISTS wordpressecomm;
 CREATE DATABASE IF NOT EXISTS nextclouddb;

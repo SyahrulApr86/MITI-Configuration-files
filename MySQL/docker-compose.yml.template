@@ -1,0 +1,21 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: [password] # password untuk user 'root'
+      MYSQL_USER: [username] # username untuk user baru, user ini akan mendapat izin sebagai superuser
+      MYSQL_PASSWORD: [password] # password untuk user baru
+      MYSQL_DATABASE: [database] # nama database yang akan dibuat secara otomatis saat container pertama kali dijalankan
+    command: --default-authentication-plugin=caching_sha2_password
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
+
