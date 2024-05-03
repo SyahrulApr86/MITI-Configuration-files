@@ -8,8 +8,8 @@ services:
       - 8081:80
     environment:
       WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wordpressuser
-      WORDPRESS_DB_PASSWORD: wordpresspass
+      WORDPRESS_DB_USER: databaseuser
+      WORDPRESS_DB_PASSWORD: passworddatabaseuser
       WORDPRESS_DB_NAME: wordpressweb
     depends_on:
       - db
@@ -23,8 +23,8 @@ services:
       - 8082:80
     environment:
       WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wordpressuser
-      WORDPRESS_DB_PASSWORD: wordpresspass
+      WORDPRESS_DB_USER: databaseuser
+      WORDPRESS_DB_PASSWORD: passworddatabaseuser
       WORDPRESS_DB_NAME: wordpressecomm
     depends_on:
       - db
@@ -36,9 +36,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: mysqlrootpass
-      MYSQL_USER: wordpressuser
-      MYSQL_PASSWORD: wordpresspass
-      MYSQL_DATABASE: wordpressdb
+      MYSQL_USER: databaseuser
+      MYSQL_PASSWORD: passworddatabaseuser
+      MYSQL_DATABASE: initdb
     command: --default-authentication-plugin=caching_sha2_password
     volumes:
       - db_data:/var/lib/mysql

@@ -8,8 +8,8 @@ services:
       - 80:80
     environment:
       WORDPRESS_DB_HOST: 10.128.0.3
-      WORDPRESS_DB_USER: wordpressuser
-      WORDPRESS_DB_PASSWORD: wordpresspass
+      WORDPRESS_DB_USER: databaseuser
+      WORDPRESS_DB_PASSWORD: passworddatabaseuser
       WORDPRESS_DB_NAME: wordpressweb
     volumes:
       - wordpress_web_data:/var/www/html

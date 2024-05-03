@@ -2,24 +2,13 @@ version: '3.9'
 
 services:
   nextcloud:
-    image: nextcloud:latest
+    build: .
     restart: always
     ports:
-      - "80:80"  # Mengubah port ini jika port 80 sudah digunakan oleh layanan lain
+      - "80:80"
     volumes:
       - nextcloud_data:/var/www/html
-    environment:
-      MYSQL_DATABASE: nextclouddb        # Nama database untuk Nextcloud
-      MYSQL_USER: wordpressuser          # Gunakan pengguna yang sama atau buat pengguna baru di MySQL
-      MYSQL_PASSWORD: wordpresspass      # Kata sandi pengguna
-      MYSQL_HOST: 10.128.0.3             # IP server MySQL
-
-      NEXTCLOUD_ADMIN_USER: admin        # Username admin Nextcloud
-      NEXTCLOUD_ADMIN_PASSWORD: admin    # Kata sandi admin Nextcloud
-
-      # Menambahkan trusted domains
-      NEXTCLOUD_TRUSTED_DOMAINS: "10.128.0.6 35.223.170.90"
 
 volumes:
   nextcloud_data:
-
+    driver: local

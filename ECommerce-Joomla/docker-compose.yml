@@ -8,8 +8,8 @@ services:
       - "80:80"
     environment:
       JOOMLA_DB_HOST: 10.128.0.3  # Ganti dengan IP dan port MySQL VM lain
-      JOOMLA_DB_USER: wordpressuser          # Ganti dengan pengguna database yang ada
-      JOOMLA_DB_PASSWORD: wordpresspass      # Ganti dengan kata sandi pengguna database
+      JOOMLA_DB_USER: databaseuser          # Ganti dengan pengguna database yang ada
+      JOOMLA_DB_PASSWORD: passworddatabaseuser      # Ganti dengan kata sandi pengguna database
       JOOMLA_DB_NAME: joomla            # Ganti dengan nama database yang digunakan Joomla
     volumes:
       - joomla_data:/var/www/html
