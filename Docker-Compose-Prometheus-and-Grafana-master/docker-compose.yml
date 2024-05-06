@@ -14,7 +14,7 @@ volumes:
 services:
 
   prometheus:
-    image: prom/prometheus:v2.17.1
+    image: prom/prometheus:latest
     container_name: prometheus
     volumes:
       - ./prometheus:/etc/prometheus
@@ -35,7 +35,7 @@ services:
       org.label-schema.group: "monitoring"
 
   alertmanager:
-    image: prom/alertmanager:v0.20.0
+    image: prom/alertmanager:latest
     container_name: alertmanager
     volumes:
       - ./alertmanager:/etc/alertmanager
@@ -51,12 +51,13 @@ services:
       org.label-schema.group: "monitoring"
 
   nodeexporter:
-    image: prom/node-exporter:v0.18.1
+    image: prom/node-exporter:latest
     container_name: nodeexporter
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /:/rootfs:ro
+      - '--path.rootfs=/host'
     command:
       - '--path.procfs=/host/proc'
       - '--path.rootfs=/rootfs'
@@ -71,7 +72,7 @@ services:
       org.label-schema.group: "monitoring"
 
   cadvisor:
-    image: gcr.io/google-containers/cadvisor:v0.34.0
+    image: gcr.io/cadvisor/cadvisor:latest
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
@@ -79,6 +80,7 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker:/var/lib/docker:ro
       - /cgroup:/cgroup:ro #doesn't work on MacOS only for Linux
+      - /dev/disk/:/dev/disk
     restart: unless-stopped
     expose:
       - 8080
@@ -88,7 +90,7 @@ services:
       org.label-schema.group: "monitoring"
 
   grafana:
-    image: grafana/grafana:6.7.2
+    image: grafana/grafana:latest
     container_name: grafana
     volumes:
       - grafana_data:/var/lib/grafana
@@ -106,7 +108,7 @@ services:
       org.label-schema.group: "monitoring"
 
   pushgateway:
-    image: prom/pushgateway:v1.2.0
+    image: prom/pushgateway:latest
     container_name: pushgateway
     restart: unless-stopped
     expose:
@@ -117,7 +119,7 @@ services:
       org.label-schema.group: "monitoring"
 
   caddy:
-    image: caddy:latest  # Menggunakan versi terbaru dari Caddy
+    image: caddy:latest
     restart: unless-stopped
     cap_add:
       - NET_ADMIN
@@ -126,6 +128,7 @@ services:
       - "9090:9090"  # Port untuk Prometheus
       - "9093:9093"  # Port untuk Alertmanager
       - "9091:9091"  # Port untuk Pushgateway
+      - "9100:9100"  # Port untuk Node Exporter
     volumes:
       - ./caddy/Caddyfile:/etc/caddy/Caddyfile
       - ./site:/srv
