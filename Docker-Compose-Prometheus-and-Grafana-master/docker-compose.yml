@@ -57,7 +57,6 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /:/rootfs:ro
-      - '--path.rootfs=/host'
     command:
       - '--path.procfs=/host/proc'
       - '--path.rootfs=/rootfs'
