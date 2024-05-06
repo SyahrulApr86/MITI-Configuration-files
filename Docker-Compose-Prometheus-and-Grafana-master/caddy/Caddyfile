@@ -1,27 +1,17 @@
 {
     # Disable automatic HTTPS. Only necessary if you really don't want HTTPS.
-    # This globally disables automatic HTTPS for all sites.
     auto_https off
 }
 
 :9090 {
-    basicauth /* {
-        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
-    }
     reverse_proxy prometheus:9090
 }
 
 :9093 {
-    basicauth /* {
-        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
-    }
     reverse_proxy alertmanager:9093
 }
 
 :9091 {
-    basicauth /* {
-        {$ADMIN_USER} {$ADMIN_PASSWORD_HASH}
-    }
     reverse_proxy pushgateway:9091
 }
 
