@@ -7,6 +7,10 @@ networks:
 volumes:
     prometheus_data: {}
     grafana_data: {}
+    caddy_data:
+      external: true
+    caddy_config:
+      external: true
 
 services:
 
@@ -114,20 +118,21 @@ services:
       org.label-schema.group: "monitoring"
 
   caddy:
-    image: stefanprodan/caddy
-    container_name: caddy
-    ports:
-      - "3000:3000"
-      - "9090:9090"
-      - "9093:9093"
-      - "9091:9091"
-    volumes:
-      - ./caddy:/etc/caddy
-    environment:
-      - ADMIN_USER=${ADMIN_USER}
-      - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+    image: caddy:latest  # Menggunakan versi terbaru dari Caddy
     restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "3000:3000"  # Port untuk Grafana
+      - "9090:9090"  # Port untuk Prometheus
+      - "9093:9093"  # Port untuk Alertmanager
+      - "9091:9091"  # Port untuk Pushgateway
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile  # Lokasi Caddyfile di host Anda
+      - ./site:/srv  # Opsional, jika Anda melayani konten statis
+      - caddy_data:/data  # Volume untuk menyimpan data Caddy
+      - caddy_config:/config  # Volume untuk menyimpan konfigurasi Caddy
     networks:
-      - monitor-net
+      - monitor-net  # Pastikan network ini sudah didefinisikan atau gunakan default
     labels:
       org.label-schema.group: "monitoring"
