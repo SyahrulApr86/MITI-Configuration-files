@@ -4,10 +4,10 @@ FROM nextcloud:latest
 ENV MYSQL_DATABASE=nextclouddb \
     MYSQL_USER=databaseuser \
     MYSQL_PASSWORD=passworddatabaseuser \
-    MYSQL_HOST=10.128.0.8 \
+    MYSQL_HOST=10.128.0.12 \
     NEXTCLOUD_ADMIN_USER=mitigas \
     NEXTCLOUD_ADMIN_PASSWORD=mitigas123 \
-    NEXTCLOUD_TRUSTED_DOMAINS="10.128.0.9"
+    NEXTCLOUD_TRUSTED_DOMAINS="10.128.0.18"
 
 # Copy scripts to the image
 COPY update_ip.sh /usr/local/bin/update_ip.sh

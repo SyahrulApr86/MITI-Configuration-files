@@ -1,0 +1,5 @@
+route:
+  receiver: 'none'
+
+receivers:
+  - name: 'none'
