@@ -170,8 +170,5 @@ create_instance "monitoring-portainer"
 
 Untuk konfigurasi dan langkah-langkah setup yang lebih detail, lihat file README di setiap direktori. Pastikan semua layanan dikonfigurasi dengan benar dan berjalan sesuai harapan.
 
-Jika Anda menghadapi masalah atau memiliki pertanyaan, silakan merujuk pada dokumentasi atau menghubungi pemelihara proyek.
-
+Jika Anda menghadapi masalah atau memiliki pertanyaan, silakan merujuk pada dokumentasi.
 ---
-
-Jangan ragu untuk menyesuaikan README ini sesuai dengan kebutuhan spesifik Anda dan tambahkan informasi tambahan yang mungkin berguna bagi pengguna.
