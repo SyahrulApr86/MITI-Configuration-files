@@ -47,7 +47,7 @@ Sebelum membuat instance di GCP, pastikan Anda memiliki kuota "In-use IP address
     - Centang kotak di sebelah kuota tersebut.
     - Pastikan kuota yang dipilih sesuai dengan proyek Anda dan juga lokasi yang benar (sebagai contoh, us-central1).
    
-   ![img.png](docs/screenshots/quota-before.png)
+       ![img.png](docs/screenshots/quota-before.png)
 
 4. **Edit Kuota:**
     - Klik `create EDIT QUOTAS`.
