@@ -120,7 +120,7 @@ create_instance "monitoring-portainer"
     
     - Copy skrip `create_instances.sh` ke cloud shell.
    
-      ![img.png](/docs/screenshots/cloud active shell.png)
+      ![img.png](/docs/screenshots/cloud-active-shell.png)
    
     - Gunakan perintah untuk membuat direktori baru dan buka file `create_instances.sh`:
         ```bash
