@@ -1,6 +1,13 @@
 
 # MITIGAS Configuration File
 
+Kelompok Mitigas:
+- Griselda Neysa Sadiya - 2106751392
+- Nazwa Allysa - 2206083672
+- Rafael Bismo Dewandaru - 2206824666
+- Syahrul Apriansyah - 2106708311
+
+
 Repositori ini berisi file Docker Compose dan konfigurasi untuk berbagai layanan yang digunakan dalam organisasi e-commerce kami. Layanan tersebut mencakup situs profil perusahaan, platform e-commerce, file server, server database, alat pemantauan, dan server login SSO. Setiap layanan dikonfigurasi untuk berjalan pada instance terpisah di Google Cloud Platform (GCP).
 
 ## Daftar Konten
