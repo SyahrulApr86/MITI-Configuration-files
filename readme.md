@@ -24,6 +24,12 @@ Organisasi menggunakan instance berikut:
 - **Monitoring**: Instance untuk memantau infrastruktur, termasuk fileserver, profil web, server database, dan e-commerce.
 - **SSO Login Server**: Instance untuk mengelola single sign-on untuk berbagai layanan.
 
+## Arsitektur
+
+Arsitektur proyek ini terdiri dari beberapa instance yang berjalan di GCP. Setiap instance berisi layanan yang berbeda dan dikonfigurasi untuk berkomunikasi satu sama lain. Berikut adalah arsitektur proyek:
+
+![arsitektur (3).png](docs/screenshots/arsitektur.png)
+
 ## Prasyarat
 
 Sebelum memulai, pastikan Anda memiliki:
