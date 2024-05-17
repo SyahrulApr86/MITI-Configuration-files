@@ -6,6 +6,7 @@ Repositori ini berisi file Docker Compose dan konfigurasi untuk berbagai layanan
 ## Daftar Konten
 
 - [Ringkasan Proyek](#ringkasan-proyek)
+- [Arsitektur](#arsitektur)
 - [Prasyarat](#prasyarat)
 - [Mengubah Kuota Alamat IP Statis](#mengubah-kuota-alamat-ip-statis)
 - [Membuat Instance di GCP](#membuat-instance-di-gcp)
