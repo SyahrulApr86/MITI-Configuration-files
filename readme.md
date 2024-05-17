@@ -156,7 +156,7 @@ create_instance "monitoring-portainer"
       ./create_instances.sh
       ```
     - Tunggu hingga semua instance selesai dibuat.
-   ![img.png](/docs/screenshots/instances created.png)
+   ![img.png](/docs/screenshots/instances-created.png)
 
 3. **Konfigurasi Instance:**
     - Masuk ke dalam Compute Engine di menu sebalah kiri. Anda akan melihat semua instance yang baru dibuat.
