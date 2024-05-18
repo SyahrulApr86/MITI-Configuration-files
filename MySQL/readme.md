@@ -1,6 +1,8 @@
 
 # MySQL Database Server Configuration
 
+![img.png](image/mysql-logo.png)
+
 Repositori ini berisi file konfigurasi untuk menjalankan server database MySQL menggunakan Docker Compose. Server ini akan menjalankan MySQL versi 8.0 dengan beberapa database dan pengguna yang telah dikonfigurasi.
 
 ## Daftar Konten
