@@ -208,8 +208,6 @@ Setelah service berjalan, Anda dapat mengakses OpenLDAP, phpLDAPadmin, dan Keycl
 Untuk informasi lebih lanjut tentang menggunakan dan mengkonfigurasi OpenLDAP, phpLDAPadmin, dan Keycloak di Docker, silakan merujuk ke dokumentasi resmi:
 
 - [Dokumentasi OpenLDAP](https://www.openldap.org/doc/)
-- [Dokumentasi phpLDAPadmin](http://phpldapadmin.sourceforge.net/wiki/index.php/Main_Page)
+- [Dokumentasi phpLDAPadmin](https://github.com/leenooks/phpLDAPadmin)
 - [Dokumentasi Keycloak](https://www.keycloak.org/documentation)
--
-
-[Dokumentasi Docker](https://docs.docker.com/)
+- [Dokumentasi Docker](https://docs.docker.com/)
