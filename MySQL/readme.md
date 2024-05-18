@@ -3,6 +3,16 @@
 
 Repositori ini berisi file konfigurasi untuk menjalankan server database MySQL menggunakan Docker Compose. Server ini akan menjalankan MySQL versi 8.0 dengan beberapa database dan pengguna yang telah dikonfigurasi.
 
+## Daftar Konten
+
+- [Struktur Direktori](#struktur-direktori)
+- [Cara Menggunakan](#cara-menggunakan)
+  - [Prasyarat](#prasyarat)
+  - [Menyesuaikan File Template](#menyesuaikan-file-template)
+  - [Menjalankan Container MySQL](#menjalankan-container-mysql)
+  - [Mengakses MySQL Server](#mengakses-mysql-server)
+  - [Inisialisasi Database](#inisialisasi-database)
+
 ## Struktur Direktori
 
 - `docker-compose.yml`: File Docker Compose utama yang digunakan untuk menjalankan container MySQL.
@@ -12,16 +22,16 @@ Repositori ini berisi file konfigurasi untuk menjalankan server database MySQL m
 
 ## Cara Menggunakan
 
-### 1. Prasyarat
+### Prasyarat
 
 Pastikan Anda telah menginstal Docker dan Docker Compose di sistem Anda. Jika belum, Anda dapat menginstalnya dengan mengikuti dokumentasi berikut:
 
 - [Instalasi Docker](https://docs.docker.com/get-docker/)
 - [Instalasi Docker Compose](https://docs.docker.com/compose/install/)
 
-atau pada [Cara Instalasi Docker](../readme.md#instalasi-docker).
+atau pada [Cara Instalasi Docker](../readme.md#instalasi-docker)
 
-### 2. Menyesuaikan File Template
+### Menyesuaikan File Template
 
 Jika Anda ingin menyesuaikan konfigurasi, Anda dapat mengedit file `docker-compose.yml.template`. Gantilah placeholder dengan nilai yang sesuai:
 
@@ -46,7 +56,7 @@ volumes:
   db_data:
 ```
 
-### 3. Menjalankan Container MySQL
+### Menjalankan Container MySQL
 
 1. **Kloning Repositori:**
    ```bash
@@ -57,12 +67,12 @@ volumes:
 2. **Menjalankan Docker Compose:**
    Pastikan Anda berada di direktori yang berisi file `docker-compose.yml`, kemudian jalankan perintah berikut:
    ```bash
-   docker-compose up -d
+   sudo docker compose up -d
    ```
 
    Perintah ini akan mendownload image MySQL (jika belum ada), membuat container, dan menjalankan MySQL server dengan konfigurasi yang telah ditentukan.
 
-### 4. Mengakses MySQL Server
+### Mengakses MySQL Server
 
 Setelah container berjalan, Anda dapat mengakses MySQL server menggunakan klien MySQL atau alat manajemen basis data seperti phpMyAdmin. Gunakan informasi berikut untuk mengakses server:
 
@@ -72,7 +82,7 @@ Setelah container berjalan, Anda dapat mengakses MySQL server menggunakan klien 
 - Password: `passworddatabaseuser`
 - Database: `initdb`
 
-### 5. Inisialisasi Database
+### Inisialisasi Database
 
 File `init.sql` berisi perintah untuk membuat database tambahan dan memberikan hak akses kepada pengguna `databaseuser`. Berikut adalah isi file `init.sql`:
 
@@ -93,10 +103,41 @@ Perintah SQL ini akan dijalankan secara otomatis saat container pertama kali dij
 Jika Anda mengalami masalah saat menjalankan container, Anda dapat memeriksa log dengan perintah berikut:
 
 ```bash
-docker-compose logs
+sudo docker compose logs
 ```
 
 Log ini akan memberikan informasi lebih lanjut tentang apa yang mungkin salah dan bagaimana cara memperbaikinya.
+
+## Port yang Digunakan
+
+Berdasarkan konfigurasi yang ada dalam file `docker-compose.yml`, hanya port 3306 yang perlu dibuka (untuk saat ini). Port ini digunakan oleh MySQL untuk komunikasi dengan klien database.
+
+### Langkah-langkah Membuka Port
+
+#### Di Docker Host
+
+Pastikan bahwa port 3306 dibuka pada firewall di host Docker Anda sehingga klien dapat mengakses MySQL server. Jika Anda menggunakan ufw pada Ubuntu, Anda dapat membuka port dengan perintah berikut:
+
+```bash
+sudo ufw allow 3306/tcp
+sudo ufw reload
+```
+
+#### Di Google Cloud Platform (GCP)
+
+Jika Anda menjalankan instance di GCP, Anda perlu memastikan bahwa port 3306 dibuka pada firewall rules GCP:
+
+1. **Buka Google Cloud Console**.
+2. **Navigasi ke VPC Network** > **Firewall rules**.
+3. **Buat Firewall Rule Baru**:
+    - Klik tombol **Create Firewall Rule**.
+    - Masukkan detail berikut:
+        - **Name**: `allow-mysql`
+        - **Targets**: `All instances in the network` atau spesifik ke instance Anda.
+        - **Source IP ranges**: `0.0.0.0/0` (untuk akses publik) atau subnet spesifik.
+        - **Protocols and ports**: Centang **Specified protocols and ports** dan masukkan `tcp:3306`.
+4. **Klik Create** untuk membuat firewall rule.
+
 
 ## Informasi Tambahan
 

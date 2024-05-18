@@ -13,25 +13,12 @@ rule_files:
 
 # A scrape configuration containing exactly one endpoint to scrape.
 scrape_configs:
-  - job_name: 'nodeexporter'
+  - job_name: 'monitoring-prometheus'
     scrape_interval: 5s
     static_configs:
       - targets: ['nodeexporter:9100']
-
-  - job_name: 'cadvisor'
-    scrape_interval: 5s
-    static_configs:
       - targets: ['cadvisor:8080']
-
-  - job_name: 'prometheus'
-    scrape_interval: 10s
-    static_configs:
       - targets: ['localhost:9090']
-
-  - job_name: 'pushgateway'
-    scrape_interval: 10s
-    honor_labels: true
-    static_configs:
       - targets: ['pushgateway:9091']
 
   - job_name: 'company-profile'
@@ -42,8 +29,10 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.14:9100'  # tahap-3-company-profile-1
-          - '10.128.0.15:9100'  # tahap-3-company-profile-2
+          - '10.128.0.14:9100'
+          - '10.128.0.15:9100'
+          - '10.128.0.14:8080'
+          - '10.128.0.15:8080'
 
   - job_name: 'database'
     honor_timestamps: true
@@ -53,7 +42,8 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.12:9100'  # tahap-3-db
+          - '10.128.0.12:9100'
+          - '10.128.0.12:8080'
 
   - job_name: 'ecommerce'
     honor_timestamps: true
@@ -63,8 +53,10 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.16:9100'  # tahap-3-ecommerce-1
-          - '10.128.0.17:9100'  # tahap-3-ecommerce-2
+          - '10.128.0.16:9100'
+          - '10.128.0.17:9100'
+          - '10.128.0.16:8080'
+          - '10.128.0.17:8080'
 
   - job_name: 'fileserver'
     honor_timestamps: true
@@ -74,7 +66,8 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.18:9100'  # tahap-3-fileserver
+          - '10.128.0.18:9100'
+          - '10.128.0.18:8080'
 
   - job_name: 'load-balancers'
     honor_timestamps: true
@@ -84,10 +77,12 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.19:9100'  # tahap-3-lb-ecommerce
-          - '10.128.0.20:9100'  # tahap-3-lb-company
+          - '10.128.0.19:9100'
+          - '10.128.0.20:9100'
+          - '10.128.0.19:8080'
+          - '10.128.0.20:8080'
 
-  - job_name: 'observium'
+  - job_name: 'monitoring-observium'
     honor_timestamps: true
     scrape_interval: 15s
     scrape_timeout: 10s
@@ -95,9 +90,18 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.21:9100'  # tahap-3-monitoring-Observium
+          - '10.128.0.21:9100'
 
-
+  - job_name: 'monitoring-portainer'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '10.128.0.21:9100'
+          - '10.128.0.21:8080'
 
 alerting:
   alertmanagers:

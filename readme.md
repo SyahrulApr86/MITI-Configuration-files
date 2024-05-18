@@ -169,6 +169,7 @@ create_instance "monitoring-portainer"
 
 ## Struktur Direktori
 
+- `Ansible`: File konfigurasi Ansible untuk mengotomatisasi berbagai tugas, salah satunya instalasi Docker di setiap instance.
 - `Wordpress-Company-Profile`: File Docker Compose dan konfigurasi untuk instance profil perusahaan.
 - `Wordpress-Ecommerce`: Platform e-commerce menggunakan WordPress.
 - `LDAP`: File konfigurasi LDAP.
