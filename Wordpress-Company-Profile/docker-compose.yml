@@ -1,13 +1,11 @@
-version: '3.9'
-
 services:
   wordpress_web:
-    image: wordpress:latest
+    image: wordpress:php8.3-apache
     restart: always
     ports:
       - 80:80
     environment:
-      WORDPRESS_DB_HOST: 10.128.0.12
+      WORDPRESS_DB_HOST: 10.128.0.24
       WORDPRESS_DB_USER: databaseuser
       WORDPRESS_DB_PASSWORD: passworddatabaseuser
       WORDPRESS_DB_NAME: wordpressweb

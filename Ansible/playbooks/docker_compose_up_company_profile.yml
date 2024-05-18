@@ -1,0 +1,13 @@
+- name: Run docker-compose down and up on company profile instances
+  hosts: company_profile
+  become: true
+  tasks:
+    - name: Run docker compose down
+      command: docker compose down
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/Wordpress-Company-Profile
+
+    - name: Run docker compose up
+      command: docker compose up -d
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/Wordpress-Company-Profile

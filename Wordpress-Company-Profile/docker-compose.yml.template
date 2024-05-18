@@ -1,8 +1,6 @@
-version: '3.9'
-
 services:
   wordpress_web:
-    image: wordpress:latest
+    image: wordpress:php8.3-apache
     restart: always
     ports:
       - 80:80

@@ -89,18 +89,87 @@ Anda juga dapat menggunakan IP address jika host Anda tidak memiliki nama domain
 
 ```ini
 [all]
-company-profile-1 ansible_host=34.173.216.13
-company-profile-2 ansible_host=34.72.169.255
-db ansible_host=35.188.65.199
-ecommerce-1 ansible_host=34.72.244.158
-ecommerce-2 ansible_host=34.132.63.81
-fileserver ansible_host=35.222.231.101
-lb-company-profile ansible_host=104.197.47.241
-lb-ecommerce ansible_host=34.69.129.247
-ldap ansible_host=34.133.240.73
-monitoring-observium ansible_host=34.66.223.250
-monitoring-portainer ansible_host=34.173.172.189
-monitoring-prome-grafana ansible_host=34.42.61.213
+company-profile-1 ansible_host=34.42.61.213
+company-profile-2 ansible_host=34.66.223.250
+db ansible_host=34.171.248.255
+ecommerce-1 ansible_host=34.173.216.13
+ecommerce-2 ansible_host=104.197.47.241
+fileserver ansible_host=34.69.129.247
+lb-company-profile ansible_host=34.72.169.255
+lb-ecommerce ansible_host=34.132.63.81
+ldap ansible_host=35.188.65.199
+monitoring-observium ansible_host=34.133.240.73
+monitoring-portainer ansible_host=34.72.244.158
+monitoring-prome-grafana ansible_host=35.222.231.101
+
+[company_profile]
+company-profile-1
+company-profile-2
+
+[ecommerce]
+ecommerce-1
+ecommerce-2
+
+[db_service]
+db
+
+[fileserver_service]
+fileserver
+
+[lb]
+lb-company-profile
+lb-ecommerce
+
+[monitoring_observium_service]
+monitoring-observium
+
+[monitoring_portainer_service]
+monitoring-portainer
+
+[monitoring_prome_grafana_service]
+monitoring-prome-grafana
+
+[ldap_service]
+ldap
+
+[node_exporter]
+company-profile-1
+company-profile-2
+ecommerce-1
+ecommerce-2
+db
+fileserver
+lb-company-profile
+lb-ecommerce
+ldap
+monitoring-observium
+monitoring-portainer
+
+[snmp]
+company-profile-1
+company-profile-2
+ecommerce-1
+ecommerce-2
+db
+fileserver
+lb-company-profile
+lb-ecommerce
+ldap
+monitoring-portainer
+monitoring-prome-grafana
+
+[portainer_agent]
+company-profile-1
+company-profile-2
+ecommerce-1
+ecommerce-2
+db
+fileserver
+lb-company-profile
+lb-ecommerce
+ldap
+monitoring-observium
+monitoring-prome-grafana
 
 [all:vars]
 ansible_user=apriansyah_syahrul

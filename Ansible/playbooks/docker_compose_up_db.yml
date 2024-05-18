@@ -1,7 +1,12 @@
-- name: Run docker-compose up on db instance
+- name: Run docker-compose down and up on db instance
   hosts: db
   become: true
   tasks:
+    - name: Run docker compose down
+      command: docker compose down
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/MySQL
+
     - name: Run docker compose up
       command: docker compose up -d
       args:
