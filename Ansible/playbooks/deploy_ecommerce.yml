@@ -1,4 +1,4 @@
-- name: Run docker-compose down and up on ecommerce instances
+- name: Run docker compose down and up on ecommerce instances
   hosts: ecommerce
   become: true
   tasks:

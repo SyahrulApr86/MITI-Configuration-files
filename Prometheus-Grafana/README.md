@@ -23,7 +23,7 @@ ADMIN_PASSWORD=admin
 ```
 git clone https://github.com/Einsteinish/Docker-Compose-Prometheus-and-Grafana.git
 cd Docker-Compose-Prometheus-and-Grafana
-docker-compose up -d
+docker compose up -d
 ```
 
 ## Prerequisites:
@@ -298,7 +298,7 @@ There are two possible solutions to this problem.
 
 To change ownership of the files run your grafana container as root and modify the permissions.
 
-First perform a `docker-compose down` then modify your docker-compose.yml to include the `user: root` option:
+First perform a `docker compose down` then modify your docker-compose.yml to include the `user: root` option:
 
 ```
   grafana:
@@ -324,7 +324,7 @@ First perform a `docker-compose down` then modify your docker-compose.yml to inc
       org.label-schema.group: "monitoring"
 ```
 
-Perform a `docker-compose up -d` and then issue the following commands:
+Perform a `docker compose up -d` and then issue the following commands:
 
 ```
 docker exec -it --user root grafana bash

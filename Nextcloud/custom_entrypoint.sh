@@ -12,7 +12,6 @@ while [ ! -f /var/www/html/config/config.php ]; do
   sleep 5
 done
 
-
 # Configure Apache to suppress the ServerName warning
 echo "ServerName localhost" >> /etc/apache2/apache2.conf
 

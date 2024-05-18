@@ -1,4 +1,4 @@
-- name: Run docker-compose down and up on db instance
+- name: Run docker compose down and up on db instance
   hosts: db
   become: true
   tasks:

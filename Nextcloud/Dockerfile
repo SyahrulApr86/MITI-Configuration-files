@@ -4,10 +4,10 @@ FROM nextcloud:latest
 ENV MYSQL_DATABASE=nextclouddb \
     MYSQL_USER=databaseuser \
     MYSQL_PASSWORD=passworddatabaseuser \
-    MYSQL_HOST=10.128.0.12 \
+    MYSQL_HOST=10.128.0.24 \
     NEXTCLOUD_ADMIN_USER=mitigas \
     NEXTCLOUD_ADMIN_PASSWORD=mitigas123 \
-    NEXTCLOUD_TRUSTED_DOMAINS="10.128.0.18"
+    NEXTCLOUD_TRUSTED_DOMAINS="10.128.0.27"
 
 # Copy scripts to the image
 COPY update_ip.sh /usr/local/bin/update_ip.sh
@@ -18,7 +18,6 @@ COPY custom_entrypoint.sh /custom_entrypoint.sh
 RUN chmod +x /usr/local/bin/update_ip.sh
 RUN chmod +x /usr/local/bin/add_trusted_domain.php
 RUN chmod +x /custom_entrypoint.sh
-
 
 # Set the new custom entrypoint
 ENTRYPOINT ["/custom_entrypoint.sh"]

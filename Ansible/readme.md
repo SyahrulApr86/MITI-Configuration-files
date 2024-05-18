@@ -336,7 +336,7 @@ ansible-playbook -i inventory.ini playbooks/clone_repository.yml
 
 ### Docker Compose Up
 ```yaml
-- name: Run docker-compose up on [host] instances
+- name: Run docker compose up on [host] instances
   hosts: host_yang_ingin_diinstall
   become: true
   tasks:
@@ -345,8 +345,8 @@ ansible-playbook -i inventory.ini playbooks/clone_repository.yml
       args:
         chdir: /lokasi/direktori/docker-compose
 
-    - name: Run docker-compose up
-      command: docker-compose up -d
+    - name: Run docker compose up
+      command: docker compose up -d
       args:
         chdir: /lokasi/direktori/docker-compose
 ```

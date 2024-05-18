@@ -1,4 +1,4 @@
-- name: Run docker-compose down and up on lb-company-profile
+- name: Run docker compose down and up on lb-company-profile
   hosts: lb-company-profile
   become: true
   tasks:
