@@ -1,5 +1,6 @@
 # LDAP Configuration
 ![LDAP Logo](image/ldap-logo.png)
+
 Repositori ini berisi file konfigurasi untuk menjalankan server LDAP menggunakan Docker Compose. Server ini akan menjalankan OpenLDAP, phpLDAPadmin, dan Keycloak dengan beberapa pengaturan yang telah dikonfigurasi.
 
 ## Daftar Konten
