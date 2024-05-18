@@ -245,7 +245,7 @@ Untuk mengakses instance di GCP, Anda dapat menggunakan SSH melalui Google Cloud
 
 ## Instalasi Docker
 
-Untuk menjalankan layanan menggunakan Docker, pastikan Anda telah menginstal Docker di setiap instance. Berikut adalah langkah-langkah instalasi Docker (atau alternatifnya anda dapat menggunakan Ansible pada [Tutorial Intall Menggunakan Ansible](Ansible/readme.md)):
+Untuk menjalankan layanan menggunakan Docker, pastikan Anda telah menginstal Docker di setiap instance. Berikut adalah langkah-langkah instalasi Docker (atau alternatifnya anda dapat menggunakan Ansible pada [Tutorial Install Menggunakan Ansible](Ansible/readme.md)):
 - Masuk ke instance menggunakan SSH.
 - Jalankan perintah berikut untuk menginstal Docker:
     ```bash
