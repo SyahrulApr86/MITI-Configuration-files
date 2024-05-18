@@ -12,6 +12,13 @@ Repositori ini berisi file konfigurasi untuk menjalankan server database MySQL m
   - [Menjalankan Container MySQL](#menjalankan-container-mysql)
   - [Mengakses MySQL Server](#mengakses-mysql-server)
   - [Inisialisasi Database](#inisialisasi-database)
+  - [Troubleshooting](#troubleshooting)
+  - [Port yang Digunakan](#port-yang-digunakan)
+    - [Langkah-langkah Membuka Port](#langkah-langkah-membuka-port)
+      - [Di Docker Host](#di-docker-host)
+      - [Di Google Cloud Platform (GCP)](#di-google-cloud-platform-gcp)
+  - [Konfigurasi Dengan Ansible](#konfigurasi-dengan-ansible)
+  - [Informasi Tambahan](#informasi-tambahan)
 
 ## Struktur Direktori
 
@@ -114,6 +121,8 @@ Berdasarkan konfigurasi yang ada dalam file `docker-compose.yml`, hanya port 330
 
 ### Langkah-langkah Membuka Port
 
+Anda bisa mengikuti langkah-langkah berikut untuk membuka port 3306, atau anda dapat melihat [Cara Membuat Firewall Rules](../readme.md#membuat-firewall-rules-di-gcp) jika menggunakan Google Cloud Platform.
+
 #### Di Docker Host
 
 Pastikan bahwa port 3306 dibuka pada firewall di host Docker Anda sehingga klien dapat mengakses MySQL server. Jika Anda menggunakan ufw pada Ubuntu, Anda dapat membuka port dengan perintah berikut:
@@ -128,16 +137,26 @@ sudo ufw reload
 Jika Anda menjalankan instance di GCP, Anda perlu memastikan bahwa port 3306 dibuka pada firewall rules GCP:
 
 1. **Buka Google Cloud Console**.
-2. **Navigasi ke VPC Network** > **Firewall rules**.
+2. **Navigasi ke VPC Network** > **Firewall**.
 3. **Buat Firewall Rule Baru**:
     - Klik tombol **Create Firewall Rule**.
     - Masukkan detail berikut:
         - **Name**: `allow-mysql`
-        - **Targets**: `All instances in the network` atau spesifik ke instance Anda.
+        - **Targets**: `Specified target tags` lalu beri nama tag `allow-mysql`
         - **Source IP ranges**: `0.0.0.0/0` (untuk akses publik) atau subnet spesifik.
         - **Protocols and ports**: Centang **Specified protocols and ports** dan masukkan `tcp:3306`.
 4. **Klik Create** untuk membuat firewall rule.
+5. **Tambahkan Tag ke Instance**:
+    - Navigasi ke **VM Instances**.
+    - Klik instance yang ingin Anda akses.
+    - Matikan instance jika sedang berjalan.
+    - Klik **Edit**.
+    - Pada bagian **Network tags**, tambahkan tag `allow-mysql`.
+    - Klik **Save** untuk menyimpan perubahan.
 
+## Konfigurasi Dengan Ansible
+
+Anda juga dapat menggunakan Ansible untuk mengelola konfigurasi MySQL dan Docker (cara ini lebih sederhana). Anda dapat melihat cara menggunakannya di [Ansible Configuration](../Ansible/readme.md).
 
 ## Informasi Tambahan
 

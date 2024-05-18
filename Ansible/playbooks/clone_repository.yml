@@ -15,7 +15,7 @@
 
     - name: Ensure the destination directory exists
       file:
-        path: '/Mitigas'
+        path: '/home/apriansyah_syahrul/Mitigas'
         state: directory
         mode: '0755'
       become: true
@@ -23,7 +23,7 @@
     - name: Clone or pull the MITI-Configuration-files repository
       git:
         repo: 'https://github.com/SyahrulApr86/MITI-Configuration-files.git'
-        dest: '/Mitigas'
+        dest: '/home/apriansyah_syahrul/Mitigas'
         version: 'HEAD'
         force: yes
       become: true

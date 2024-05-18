@@ -17,6 +17,7 @@ Repositori ini berisi file Docker Compose dan konfigurasi untuk berbagai layanan
 - [Prasyarat](#prasyarat)
 - [Mengubah Kuota Alamat IP Statis](#mengubah-kuota-alamat-ip-statis)
 - [Membuat Instance di GCP](#membuat-instance-di-gcp)
+- [Membuat Aturan Firewall di GCP](#membuat-firewall-rules-di-gcp)
 - [Struktur Direktori](#struktur-direktori)
 - [SSH ke Instance](#ssh-ke-instance)
 - [Instalasi Docker](#instalasi-docker)
@@ -165,7 +166,28 @@ create_instance "monitoring-portainer"
     ![img.png](docs/screenshots/gce.png)
     - Konfigurasikan setiap instance sesuai kebutuhan Anda.
    ![img.png](docs/screenshots/gce-running.png)
-   
+
+## Membuat Firewall Rules di GCP
+
+Setelah membuat instance di GCP, pastikan Anda membuat aturan firewall yang diperlukan untuk mengizinkan lalu lintas ke instance Anda. Skrip berikut menunjukkan cara membuat aturan firewall menggunakan perintah CLI dengan membuka port sesuai yang dibutuhkan pada masing-masing service. Simpan skrip ini sebagai `create_firewall_rules.sh` dan jalankan untuk membuat aturan firewall yang diperlukan.
+
+```bash
+#!/bin/bash
+
+# Allow SNMP
+gcloud compute --project=mitigas-final firewall-rules create allow-snmp --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=udp:161,udp:162 --source-ranges=0.0.0.0/0 --target-tags=allow-snmp
+
+# Allow MySQL
+gcloud compute --project=mitigas-final firewall-rules create allow-mysql --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:3306 --source-ranges=0.0.0.0/0 --target-tags=allow-mysql
+
+```
+
+Kemudian jalankan skrip ini di Cloud Shell untuk membuat aturan firewall yang diperlukan.
+
+```bash
+chmod +x create_firewall_rules.sh
+./create_firewall_rules.sh
+```
 
 ## Struktur Direktori
 

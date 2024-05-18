@@ -1,0 +1,8 @@
+- name: Run docker-compose up on db instance
+  hosts: db
+  become: true
+  tasks:
+    - name: Run docker compose up
+      command: docker compose up -d
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/MySQL

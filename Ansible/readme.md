@@ -229,7 +229,7 @@ Dan Hasil akhirnya akan seperti ini:
 Berikut adalah contoh playbook Ansible lainnya yang dapat Anda gunakan:
 ### Clone Repository dari GitHub
 ```yaml
-- name: Install git and clone repository on all instances
+- name: Install git and clone/pull repository on all instances
   hosts: all
   become: true
   tasks:
@@ -244,12 +244,44 @@ Berikut adalah contoh playbook Ansible lainnya yang dapat Anda gunakan:
         state: present
       become: true
 
-    - name: Clone the MITI-Configuration-files repository
+    - name: Ensure the destination directory exists
+      file:
+        path: '/home/apriansyah_syahrul/Mitigas'
+        state: directory
+        mode: '0755'
+      become: true
+
+    - name: Clone or pull the MITI-Configuration-files repository
       git:
         repo: 'https://github.com/SyahrulApr86/MITI-Configuration-files.git'
-        dest: './'
+        dest: '/home/apriansyah_syahrul/Mitigas'
         version: 'HEAD'
         force: yes
       become: true
+
+```
+Pastikan destination directory sesuai dengan yang Anda inginkan. Anda juga dapat mengganti `repo` dengan URL repository yang ingin Anda clone.
+```bash
+ansible-playbook -i inventory.ini playbooks/clone_repository.yml
 ```
 
+### Docker Compose Up
+```yaml
+- name: Run docker-compose up on [host] instances
+  hosts: host_yang_ingin_diinstall
+  become: true
+  tasks:
+    - name: Change to Docker Compose directory
+      command: chdir=/lokasi/direktori/docker-compose
+      args:
+        chdir: /lokasi/direktori/docker-compose
+
+    - name: Run docker-compose up
+      command: docker-compose up -d
+      args:
+        chdir: /lokasi/direktori/docker-compose
+```
+Pastikan Anda mengganti `host_yang_ingin_diinstall` dengan nama host yang ingin Anda install. Anda juga perlu mengganti `/lokasi/direktori/docker-compose` dengan lokasi direktori yang berisi file `docker-compose.yml`.
+```bash
+ansible-playbook -i inventory.ini playbooks/docker_compose_up.yml
+```
