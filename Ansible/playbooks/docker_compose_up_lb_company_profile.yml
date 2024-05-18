@@ -1,0 +1,18 @@
+- name: Run docker-compose down and up on lb-company-profile
+  hosts: lb-company-profile
+  become: true
+  tasks:
+    - name: Run docker compose down
+      command: docker compose down
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/NGINX-Company-Profile
+
+    - name: Remove specific Docker volume
+      command: docker volume rm nginx-company-profile_nginx_company_profile_data
+      ignore_errors: yes
+      become: true
+
+    - name: Run docker compose up
+      command: docker compose up -d
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/NGINX-Company-Profile

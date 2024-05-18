@@ -1,0 +1,18 @@
+- name: Run docker-compose down and up on lb-ecommerce
+  hosts: lb-ecommerce
+  become: true
+  tasks:
+    - name: Run docker compose down
+      command: docker compose down
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/NGINX-Ecommerce
+
+    - name: Remove specific Docker volume
+      command: docker volume rm nginx-ecommerce_nginx_ecommerce_data
+      ignore_errors: yes
+      become: true
+
+    - name: Run docker compose up
+      command: docker compose up -d
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/NGINX-Ecommerce

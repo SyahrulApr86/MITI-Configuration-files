@@ -8,4 +8,4 @@ services:
     restart: always
 
 volumes:
-    nginx_ecommerce_data:
+    nginx_company_profile_data:

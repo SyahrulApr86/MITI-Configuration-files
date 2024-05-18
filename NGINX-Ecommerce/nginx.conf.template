@@ -10,8 +10,8 @@ http {
     access_log /var/log/nginx/access.log main;
 
     upstream wordpress_backend {
-        server 10.128.0.16;  # IP internal dari ecommerce
-        server 10.128.0.17;  # IP internal dari ecommerce-1
+        server [IP_ECOMMERCE_1];  # IP internal dari ecommerce-1
+        server [IP_ECOMMERCE_2];  # IP internal dari ecommerce-2
     }
 
     server {

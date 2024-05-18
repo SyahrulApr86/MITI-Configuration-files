@@ -8,7 +8,7 @@
         chdir: /home/apriansyah_syahrul/Mitigas/Wordpress-Ecommerce
 
     - name: Remove specific Docker volume
-      command: docker volume rm wordpress_ecommerce_wordpress_ecommerce_data
+      command: docker volume rm wordpress-ecommerce_wordpress_ecommerce_data
       ignore_errors: yes
       become: true
 
