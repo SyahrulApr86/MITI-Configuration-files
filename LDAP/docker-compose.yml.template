@@ -11,18 +11,18 @@ services:
       - ./data/slapd/database:/var/lib/ldap
       - ./data/slapd/config:/etc/ldap/slapd.d
     environment:
-      - LDAP_ORGANISATION=Mitigas Inc.
-      - LDAP_DOMAIN=mitigas.com
-      - LDAP_ADMIN_USERNAME=admin
-      - LDAP_ADMIN_PASSWORD=admin_password
-      - LDAP_CONFIG_PASSWORD=config_password
-      - "LDAP_BASE_DN=dc=mitigas,dc=com"
-      - LDAP_TLS_CRT_FILENAME=server.crt
-      - LDAP_TLS_KEY_FILENAME=server.key
-      - LDAP_TLS_CA_CRT_FILENAME=mitigas.ca.crt
+      - LDAP_ORGANISATION=[Nama Organisasi]
+      - LDAP_DOMAIN=[domain.com]
+      - LDAP_ADMIN_USERNAME=[admin_username]
+      - LDAP_ADMIN_PASSWORD=[admin_password]
+      - LDAP_CONFIG_PASSWORD=[config_password]
+      - "LDAP_BASE_DN=[dc=domain,dc=com]"
+      - LDAP_TLS_CRT_FILENAME=[server.crt]
+      - LDAP_TLS_KEY_FILENAME=[server.key]
+      - LDAP_TLS_CA_CRT_FILENAME=[ca.crt]
       - LDAP_READONLY_USER=true
-      - LDAP_READONLY_USER_USERNAME=readonly
-      - LDAP_READONLY_USER_PASSWORD=readonly_password
+      - LDAP_READONLY_USER_USERNAME=[readonly_username]
+      - LDAP_READONLY_USER_PASSWORD=[readonly_password]
     networks:
       - openldap
 
@@ -47,8 +47,8 @@ services:
     ports:
       - "8081:8080"
     environment:
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=admin_password
+      - KEYCLOAK_ADMIN=[admin_username]
+      - KEYCLOAK_ADMIN_PASSWORD=[admin_password]
       - KC_DB=dev-file
       - KC_HOSTNAME_STRICT=false
       - KC_HTTP_ENABLED=true

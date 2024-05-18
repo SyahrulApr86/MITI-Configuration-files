@@ -157,6 +157,9 @@ Setelah service berjalan, Anda dapat mengakses Nextcloud melalui browser menggun
 
 ![Nextcloud Web](image/nextcloud-web.png)
 
+Setelah login, tampilannya akan seperti ini:
+![img.png](image/nextcloud-after-login.png)
+
 ## Informasi Tambahan
 
 Untuk informasi lebih lanjut tentang menggunakan dan mengkonfigurasi Nextcloud di Docker, silakan merujuk ke dokumentasi resmi Nextcloud dan Docker:
