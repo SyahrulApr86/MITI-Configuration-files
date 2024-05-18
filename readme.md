@@ -18,6 +18,8 @@ Repositori ini berisi file Docker Compose dan konfigurasi untuk berbagai layanan
 - [Mengubah Kuota Alamat IP Statis](#mengubah-kuota-alamat-ip-statis)
 - [Membuat Instance di GCP](#membuat-instance-di-gcp)
 - [Struktur Direktori](#struktur-direktori)
+- [SSH ke Instance](#ssh-ke-instance)
+- [Instalasi Docker](#instalasi-docker)
 - [Informasi Tambahan](#informasi-tambahan)
 
 
@@ -243,7 +245,7 @@ Untuk mengakses instance di GCP, Anda dapat menggunakan SSH melalui Google Cloud
 
 ## Instalasi Docker
 
-Untuk menjalankan layanan menggunakan Docker, pastikan Anda telah menginstal Docker di setiap instance. Berikut adalah langkah-langkah instalasi Docker dan Docker Compose:
+Untuk menjalankan layanan menggunakan Docker, pastikan Anda telah menginstal Docker di setiap instance. Berikut adalah langkah-langkah instalasi Docker (atau alternatifnya anda dapat menggunakan Ansible pada [Tutorial Intall Menggunakan Ansible](Ansible/readme.md)):
 - Masuk ke instance menggunakan SSH.
 - Jalankan perintah berikut untuk menginstal Docker:
     ```bash
