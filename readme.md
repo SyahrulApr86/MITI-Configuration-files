@@ -167,18 +167,102 @@ create_instance "monitoring-portainer"
 
 ## Struktur Direktori
 
-- `Company-Profile`: File Docker Compose dan konfigurasi untuk instance profil perusahaan.
-- `Docker-Compose-Prometheus-and-Grafana-master`: Pengaturan pemantauan dengan Prometheus dan Grafana.
-- `ECommerce-Joomla`: Platform e-commerce menggunakan Joomla.
-- `Ecommerce-Wordpress`: Platform e-commerce menggunakan WordPress.
-- `ldap`: File konfigurasi LDAP.
+- `Wordpress-Company-Profile`: File Docker Compose dan konfigurasi untuk instance profil perusahaan.
+- `Wordpress-Ecommerce`: Platform e-commerce menggunakan WordPress.
+- `LDAP`: File konfigurasi LDAP.
 - `MySQL`: File konfigurasi database MySQL.
 - `Nextcloud`: Pengaturan file server menggunakan Nextcloud.
-- `Nginx-lb-Company-Profile-Wordpress`: Nginx load balancer untuk profil perusahaan menggunakan WordPress.
-- `Nginx-lb-ECommerce-Wordpress`: Nginx load balancer untuk platform e-commerce menggunakan WordPress.
+- `NGINX-Company-Profile`: Nginx load balancer untuk profil perusahaan menggunakan WordPress.
+- `NGINX-Ecommerce`: Nginx load balancer untuk platform e-commerce menggunakan WordPress.
 - `Observium`: Pengaturan pemantauan menggunakan Observium.
 - `Portainer`: Antarmuka manajemen Docker menggunakan Portainer.
-- `Wordpress-All-in-One`: Pengaturan all-in-one untuk WordPress.
+- `Prometheus-Grafana`: Pengaturan pemantauan dengan Prometheus dan Grafana.
+
+## SSH ke Instance
+
+Untuk mengakses instance di GCP, Anda dapat menggunakan SSH melalui Google Cloud Console atau menggunakan terminal. 
+1. **SSH melalui Google Cloud Console:**
+    - Buka Google Cloud Console.
+    - Pilih instance yang ingin Anda akses.
+    - Klik tombol SSH di sebelah instance.
+    
+      ![img_1.png](docs/screenshots/ssh-in-gce.png)
+    - Anda akan masuk ke instance menggunakan SSH.
+   
+      ![img.png](docs/screenshots/ssh-db-in-gce.png)
+
+2. **SSH melalui Terminal:**
+    - Buka terminal lokal Anda (PowerShell, Terminal, Bash, Zsh, dll.)
+    - Siapkan nama berkas untuk kunci dan direktori tempat kunci tersebut disimpan. Kami merekomendasikan untuk menaruh pada direktori standar milik SSH, yaitu .ssh di direkotori $HOME atau jika menggunakan Windows, biasanya di C:\Users\[username]\.ssh. 
+    - Jalankan perintah ssh-keygen sembari menspesi-fikasikan tipe dan nama kunci seperti berikut::
+      ```bash
+      ssh-keygen -t ed25519 -f [lokasi penyimpanan kunci]/[nama kunci]
+      ```
+      - Contoh:
+        ```bash
+        ssh-keygen -t ed25519 -f C:\Users\USER\.ssh\mitigas-key
+        ```
+    - Setelah perintahnya selesai dijalankan, Anda akan diberitahu lokasi penyimpanan dari kunci privat dan publik milik Anda.
+   
+      ![img.png](docs/screenshots/ssh-location.png)
+      - Catat:
+        - Kunci publik (kunci dengan ekstensi .pub) bertujuan untuk disebarluaskan.
+        - Kunci private (berkas tanpa ekstensi) merupakan kunci yang sebenarnya dan tidak untuk dibagikan kepada siapapun dalam kondisi apapun. 
+    - “Cetak” berkas kunci publik (berkas dengan ekstensi .pub) menggunakan perintah berikut:
+        ```bash
+        cat [lokasi penyimpanan kunci]/[nama kunci].pub
+        ```
+      untuk windows ganti cat dengan type
+        - Contoh:
+            ```bash
+            type C:\Users\USER\.ssh\mitigas-key.pub
+            ```
+        
+          ![img.png](docs/screenshots/pub-key.png)
+    - Untuk menjadikan kunci yang telah kita buat valid dengan tujuan menghubungkan perangkat lokal dengan mesin GCP kita, perlu dilakukan pendaftaran kunci SSH milik kita ke proyek GCP kita. Hal ini dapat diperoleh dengan memperbarui metadata dari layanan Google Compute Engine
+    - Di dalam proyek Anda, klik tobol hamburger pada pojok kiri atas, hover menu “Compute Engine”, dan klik pada menu “Metadata”.
+   
+      ![img.png](docs/screenshots/metadata-menu.png)
+    - Navigasi ke menu SSH Keys dan klik tombol. “Add SSH Keys”.
+   
+      ![img.png](docs/screenshots/add-ssh-key.png)
+    - Salin kunci publik milik Anda, berikan spasi, dan masukkan email Anda dengan mengganti semua titik (.) menjadi underscore (_). Misal, jika email Anda john.doe@gmail.com, maka menjadi john_doe. Jika sudah, klik “Save” pada bagian bawah halaman.
+   
+      ![img.png](docs/screenshots/add-ssh-key-to-gcp.png)
+    - Sekarang, Anda dapat mengakses instance di GCP menggunakan SSH. Gunakan perintah berikut:
+      ```bash
+      ssh -i [lokasi penyimpanan kunci]/[nama kunci] [username]@[alamat ip instance]
+      ```
+      - Contoh:
+        ```bash
+        ssh -i C:\Users\USER\.ssh\mitigas-key apriansyah_syahrul@34.123.456.789
+        ```
+        
+        ![img.png](docs/screenshots/ssh-from-terminal.png)
+
+
+## Instalasi Docker
+
+Untuk menjalankan layanan menggunakan Docker, pastikan Anda telah menginstal Docker di setiap instance. Berikut adalah langkah-langkah instalasi Docker dan Docker Compose:
+- Masuk ke instance menggunakan SSH.
+- Jalankan perintah berikut untuk menginstal Docker:
+    ```bash
+   sudo apt-get update
+   sudo apt-get install ca-certificates curl
+   sudo install -m 0755 -d /etc/apt/keyrings
+   sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+   sudo chmod a+r /etc/apt/keyrings/docker.asc
+   
+   # Add the repository to Apt sources:
+   echo \
+   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+   $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   sudo apt-get update
+   
+   sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
+    ```
+
 
 ## Informasi Tambahan
 
