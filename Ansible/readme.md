@@ -223,3 +223,33 @@ Hasilnya akan menunjukkan proses instalasi Docker pada semua host yang terdaftar
 ![img.png](image/ansible-run.png)
 Dan Hasil akhirnya akan seperti ini:
 ![img.png](image/ansible-finish.png)
+
+## Contoh Playbook Ansible Lainnya
+
+Berikut adalah contoh playbook Ansible lainnya yang dapat Anda gunakan:
+### Clone Repository dari GitHub
+```yaml
+- name: Install git and clone repository on all instances
+  hosts: all
+  become: true
+  tasks:
+    - name: Update all packages using the apt repository
+      apt:
+        update_cache: yes
+      become: true
+
+    - name: Install git
+      apt:
+        name: git
+        state: present
+      become: true
+
+    - name: Clone the MITI-Configuration-files repository
+      git:
+        repo: 'https://github.com/SyahrulApr86/MITI-Configuration-files.git'
+        dest: './'
+        version: 'HEAD'
+        force: yes
+      become: true
+```
+
