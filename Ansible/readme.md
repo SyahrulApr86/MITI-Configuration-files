@@ -14,6 +14,8 @@
 
 ## Apa itu Ansible?
 
+![img.png](image/logo.png)
+
 Ansible adalah sebuah platform perangkat lunak open-source yang digunakan untuk otomatisasi tugas-tugas IT seperti penyebaran aplikasi, manajemen konfigurasi, manajemen perangkat lunak, dan orkestrasi infrastruktur. Ini memungkinkan para administrator sistem untuk menyediakan, mengotomatisasi, dan mengelola infrastruktur IT mereka dengan lebih efisien melalui pendekatan berbasis kode (code-based) yang mudah dibaca dan dipelajari.
 
 ## Prasyarat
@@ -138,7 +140,7 @@ ansible all -i inventory.ini -m ping
 ```
 
 Jika konfigurasi Anda benar, Anda akan melihat hasil yang menunjukkan bahwa setiap host merespons dengan "pong".
-![img.png](screenshots/ansible-ping.png)
+![img.png](image/ansible-ping.png)
 
 ## Menulis Playbook Ansible
 
@@ -218,6 +220,6 @@ ansible-playbook -i inventory.ini playbooks/install_docker.yml
 ```
 
 Hasilnya akan menunjukkan proses instalasi Docker pada semua host yang terdaftar di file inventory. 
-![img.png](screenshots/ansible-run.png)
+![img.png](image/ansible-run.png)
 Dan Hasil akhirnya akan seperti ini:
-![img.png](screenshots/ansible-finish.png)
+![img.png](image/ansible-finish.png)
