@@ -10,8 +10,8 @@ http {
     access_log /var/log/nginx/access.log main;
 
     upstream wordpress_backends {
-        server 10.128.0.22    # IP internal dari company-profile
-        server 10.128.0.23;   # IP internal dari company-profile-1
+        server [IP-EXTERNAL-1];   # IP external dari company-profile-1
+        server [IP-EXTERNAL-2];   # IP external dari company-profile-2
     }
 
     server {
