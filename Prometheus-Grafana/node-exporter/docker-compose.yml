@@ -1,9 +1,6 @@
-version: '3.9'
-
 services:
-
   nodeexporter:
-    image: prom/node-exporter:v0.18.1
+    image: prom/node-exporter:v1.8.0
     container_name: nodeexporter
     volumes:
       - /proc:/host/proc:ro
@@ -20,17 +17,18 @@ services:
       org.label-schema.group: "monitoring"
 
   cadvisor:
-    image: gcr.io/google-containers/cadvisor:v0.34.0
+    image: gcr.io/cadvisor/cadvisor:v0.49.1
     container_name: cadvisor
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
-      - /cgroup:/cgroup:ro
+      - /dev/disk/:/dev/disk:ro
     restart: unless-stopped
     network_mode: host
+    privileged: true
+    devices:
+      - /dev/kmsg
     labels:
       org.label-schema.group: "monitoring"
-  
-
