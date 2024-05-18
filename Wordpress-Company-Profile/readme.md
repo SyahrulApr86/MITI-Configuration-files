@@ -1,4 +1,3 @@
-
 # Wordpress Company Profile Configuration
 ![img.png](image/wp-logo.png)
 Repositori ini berisi file konfigurasi untuk menjalankan server Wordpress untuk profil perusahaan menggunakan Docker Compose. Server ini akan menjalankan Wordpress dengan beberapa pengaturan yang telah dikonfigurasi.
@@ -23,13 +22,12 @@ Repositori ini berisi file konfigurasi untuk menjalankan server Wordpress untuk 
 
 ## Struktur Direktori
 
-- `credential`: File yang berisi kredensial untuk Wordpress. File ini hanya sebagai pengingat, anda bisa mengganti kredensial sesuai kebutuhan.
-  - **Title**: Mitigas
-  - **Username**: Mitigas
-  - **Password**: Mitigas123!
 - `docker-compose.yml`: File Docker Compose utama yang digunakan untuk menjalankan container Wordpress.
 - `docker-compose.yml.template`: Template file Docker Compose yang dapat disesuaikan dengan kebutuhan.
 - `readme.md`: File dokumentasi ini.
+- `image`: Direktori yang berisi gambar untuk dokumentasi.
+    - `wp-logo.png`: Logo Wordpress.
+    - `wp-web.png`: Screenshot Wordpress.
 
 ## Cara Menggunakan
 
