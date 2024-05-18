@@ -13,18 +13,21 @@
         state: absent
         autoremove: true
       become: true
+      timeout: 60
 
     - name: Update all packages using the apt repository
       apt:
         update_cache: yes
         force_apt_get: yes
       become: true
+      timeout: 60
 
     - name: Upgrading all apt packages using apt
       apt:
         force_apt_get: yes
         upgrade: yes
       become: true
+      timeout: 60
 
     - name: Install packages
       apt:
@@ -34,21 +37,25 @@
           - gnupg
         state: present
       become: true
+      timeout: 60
 
     - name: Add Docker official GPG key
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
+      timeout: 60
 
     - name: Add Docker Repository
       apt_repository:
         repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
         state: present
+      timeout: 60
 
     - name: Update all packages using the apt repository
       apt:
         update_cache: yes
         force_apt_get: yes
       become: true
+      timeout: 60
 
     - name: Install Docker Engine
       apt:
@@ -59,3 +66,4 @@
           - docker-buildx-plugin
           - docker-compose-plugin
         state: present
+      timeout: 60

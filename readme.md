@@ -264,7 +264,20 @@ Untuk menjalankan layanan menggunakan Docker, pastikan Anda telah menginstal Doc
    
    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
     ```
+  
+## Menjalankan Layanan
 
+Setelah Docker diinstal, Anda dapat menjalankan layanan menggunakan Docker Compose. Setiap direktori layanan berisi file Docker Compose dan konfigurasi yang diperlukan. Saran kami adalah untuk menjalankan layanan sesuai urutan berikut:
+1. [Database Server (MySQL)](MySQL/readme.md)
+   - Hal ini penting karena layanan lain seperti profil perusahaan dan platform e-commerce memerlukan database untuk berjalan.
+2. [Company Profile](Wordpress-Company-Profile/readme.md), [E-commerce](Wordpress-Ecommerce/readme.md), [File Server (Nextcloud)](Nextcloud/readme.md)
+   - Setelah database dijalankan, Anda dapat menjalankan layanan profil perusahaan, platform e-commerce, dan file server.
+3. [Load Balancer](NGINX-Company-Profile/readme.md), [Load Balancer E-commerce](NGINX-Ecommerce/readme.md)
+   - Load balancer diperlukan untuk mendistribusikan lalu lintas ke instance yang berbeda, dalam hal ini, profil perusahaan dan platform e-commerce.
+4. [LDAP](LDAP/readme.md)
+    - Layanan LDAP diperlukan untuk mengelola login SSO.
+5. [Observium](Observium/readme.md), [Portainer](Portainer/readme.md), [Prometheus-Grafana](Prometheus-Grafana/readme.md)
+   - Setelah layanan utama dijalankan, Anda dapat menjalankan layanan pemantauan dan manajemen.
 
 ## Informasi Tambahan
 

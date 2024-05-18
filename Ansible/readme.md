@@ -1,6 +1,17 @@
 
 # Tutorial Menggunakan Ansible
 
+## Daftar Konten
+
+1. [Apa itu Ansible?](#apa-itu-ansible)
+2. [Prasyarat](#prasyarat)
+3. [Instalasi Ansible](#instalasi-ansible)
+4. [Struktur Direktori Ansible](#struktur-direktori-ansible)
+5. [Menyiapkan Inventory Ansible](#menyiapkan-inventory-ansible)
+6. [Menguji Koneksi ke Host](#menguji-koneksi-ke-host)
+7. [Menulis Playbook Ansible](#menulis-playbook-ansible)
+8. [Menjalankan Playbook](#menjalankan-playbook)
+
 ## Apa itu Ansible?
 
 Ansible adalah sebuah platform perangkat lunak open-source yang digunakan untuk otomatisasi tugas-tugas IT seperti penyebaran aplikasi, manajemen konfigurasi, manajemen perangkat lunak, dan orkestrasi infrastruktur. Ini memungkinkan para administrator sistem untuk menyediakan, mengotomatisasi, dan mengelola infrastruktur IT mereka dengan lebih efisien melalui pendekatan berbasis kode (code-based) yang mudah dibaca dan dipelajari.
@@ -205,3 +216,8 @@ Setelah struktur direktori siap, Anda dapat menjalankan playbook dengan perintah
 ```bash
 ansible-playbook -i inventory.ini playbooks/install_docker.yml
 ```
+
+Hasilnya akan menunjukkan proses instalasi Docker pada semua host yang terdaftar di file inventory. 
+![img.png](screenshots/ansible-run.png)
+Dan Hasil akhirnya akan seperti ini:
+![img.png](screenshots/ansible-finish.png)
