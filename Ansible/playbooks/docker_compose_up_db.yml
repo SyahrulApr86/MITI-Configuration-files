@@ -7,6 +7,10 @@
       args:
         chdir: /home/apriansyah_syahrul/Mitigas/MySQL
 
+    - name: Remove specific Docker volume
+      command: docker volume rm mysql_db_data
+      become: true
+
     - name: Run docker compose up
       command: docker compose up -d
       args:

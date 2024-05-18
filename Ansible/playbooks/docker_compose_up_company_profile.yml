@@ -7,6 +7,9 @@
       args:
         chdir: /home/apriansyah_syahrul/Mitigas/Wordpress-Company-Profile
 
+    - name: Remove specific Docker volume
+      command: sudo docker volume rm wordpress-company-profile_wordpress_web_data
+
     - name: Run docker compose up
       command: docker compose up -d
       args:

@@ -19,6 +19,7 @@ Repositori ini berisi file konfigurasi untuk menjalankan server Wordpress untuk 
       - [Di Google Cloud Platform (GCP)](#di-google-cloud-platform-gcp)
   - [Konfigurasi Dengan Ansible](#konfigurasi-dengan-ansible)
   - [Informasi Tambahan](#informasi-tambahan)
+  - [Setelah Service Berjalan](#setelah-service-berjalan)
 
 ## Struktur Direktori
 
@@ -144,6 +145,12 @@ Jika Anda menjalankan instance di GCP, Anda perlu memastikan bahwa port 80 dibuk
 ## Konfigurasi Dengan Ansible
 
 Anda juga dapat menggunakan Ansible untuk mengelola konfigurasi Wordpress dan Docker (cara ini lebih sederhana). Anda dapat melihat cara menggunakannya di [Ansible Configuration](../Ansible/readme.md).
+
+## Setelah Service Berjalan
+
+Setelah service berjalan, Anda dapat mengakses Wordpress melalui browser menggunakan URL <ip_external>/wp-admin/install.php untuk mengatur Wordpress. Anda akan diarahkan ke halaman instalasi Wordpress. Ikuti langkah-langkah yang diberikan untuk menyelesaikan instalasi Wordpress. Selamat mencoba!
+
+![img.png](image/wp-web.png)
 
 ## Informasi Tambahan
 
