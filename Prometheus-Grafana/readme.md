@@ -8,6 +8,35 @@ Ini adalah repositori yang di-fork. Jadi, Anda mungkin ingin mengunjungi reposit
 
 Info tambahan: [Docker - Prometheus and Grafana](https://bogotobogo.com/DevOps/Docker/Docker_Prometheus_Grafana.php)
 
+
+## Struktur Direktori
+
+```plaintext
+.
+├── alertmanager
+│   └── config.yml
+├── docker-compose.yml
+├── exporter
+│   └── docker-compose.yml
+├── grafana
+│   └── provisioning
+│       ├── dashboards
+│       │   ├── dashboard.yml
+│       │   ├── docker_containers.json
+│       │   ├── docker_host.json
+│       │   ├── monitor_services.json
+│       │   └── nginx_container.json
+│       └── datasources
+│           └── datasource.yml
+├── prometheus
+│   ├── alert.rules
+│   └── prometheus.yml
+├── readme.md
+├── README.md
+└── screens
+```
+
+
 ## Prasyarat:
 
 * Docker Engine >= 1.13
@@ -156,7 +185,8 @@ Info tambahan: [Docker - Prometheus and Grafana](https://bogotobogo.com/DevOps/D
       - Pada bagian **Network tags**, tambahkan tag `allow-prometheus-grafana`.
       - Klik **Save** untuk menyimpan perubahan.
 
-***Docker Host Dashboard***
+
+## Docker Host Dashboard
 
 ![Host](screens/Grafana_Docker_Host.png)
 
@@ -170,30 +200,6 @@ Dasbor Docker Host menunjukkan metrik kunci untuk memantau penggunaan sumber day
 * Grafik penggunaan jaringan berdasarkan perangkat (inbound Bps, outbound Bps)
 * Grafik penggunaan dan aktivitas swap
 
+## Alerting
 
-## Struktur Direktori
-
-```plaintext
-.
-├── alertmanager
-│   └── config.yml
-├── docker-compose.yml
-├── exporter
-│   └── docker-compose.yml
-├── grafana
-│   └── provisioning
-│       ├── dashboards
-│       │   ├── dashboard.yml
-│       │   ├── docker_containers.json
-│       │   ├── docker_host.json
-│       │   ├── monitor_services.json
-│       │   └── nginx_container.json
-│       └── datasources
-│           └── datasource.yml
-├── prometheus
-│   ├── alert.rules
-│   └── prometheus.yml
-├── readme.md
-├── README.md
-└── screens
-```
+Selanjutnya Anda dapat mengatur aturan peringatan pada AlertManager. Anda dapat mengatur langsung pada interface AlertManager yang dapat diakses pada `http://<host-ip>:9093`. Atau Anda dapat mengatur aturan peringatan pada file `alert.rules` dan mengatur konfigurasi pada file `alertmanager.yml`. 
