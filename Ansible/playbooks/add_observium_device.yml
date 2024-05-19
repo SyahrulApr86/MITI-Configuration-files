@@ -1,0 +1,20 @@
+- name: Add devices to Observium
+  hosts: monitoring-observium
+  become: true
+  vars:
+    snmp_hosts:
+      - company-profile-1
+      - company-profile-2
+      - ecommerce-1
+      - ecommerce-2
+      - db
+      - fileserver
+      - lb-company-profile
+      - lb-ecommerce
+      - ldap
+      - monitoring-portainer
+      - monitoring-prome-grafana
+  tasks:
+    - name: Add devices to Observium
+      command: /opt/observium/add_device.php {{ item }}
+      with_items: "{{ snmp_hosts }}"

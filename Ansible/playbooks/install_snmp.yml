@@ -1,0 +1,31 @@
+- name: Install and configure SNMP on all devices
+  hosts: snmp
+  become: true
+  tasks:
+    - name: Install SNMP and dependencies
+      apt:
+        name:
+          - snmpd
+          - snmp
+          - libsnmp-dev
+        state: present
+        update_cache: yes
+
+    - name: Backup snmpd.conf
+      copy:
+        src: /etc/snmp/snmpd.conf
+        dest: /etc/snmp/snmpd.conf.bak
+        remote_src: yes
+
+    - name: Update snmpd.conf agentAddress
+      lineinfile:
+        path: /etc/snmp/snmpd.conf
+        regexp: '^agentaddress  127.0.0.1,\[::1\]'
+        line: 'agentAddress udp:161,udp6:[::1]:161'
+        backup: yes
+
+    - name: Restart SNMP daemon
+      systemd:
+        name: snmpd
+        state: restarted
+        enabled: yes
