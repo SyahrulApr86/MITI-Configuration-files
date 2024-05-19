@@ -2,6 +2,7 @@
 # Observium Installation Guide
 
 ![Observium Logo](image/observium-logo.png)
+
 Repositori ini berisi panduan untuk menginstal Observium secara manual di server Anda. Observium adalah perangkat lunak pemantauan jaringan yang mendukung berbagai perangkat.
 
 ## Daftar Konten
@@ -23,7 +24,6 @@ Repositori ini berisi panduan untuk menginstal Observium secara manual di server
 
 - `readme.md`: File dokumentasi ini.
 - `image`: Direktori yang berisi gambar untuk dokumentasi.
-    - `observium-logo.png`: Logo Observium.
 
 ## Prasyarat
 

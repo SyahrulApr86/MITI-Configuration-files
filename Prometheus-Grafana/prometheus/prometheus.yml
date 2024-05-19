@@ -5,7 +5,7 @@ global:
   # Attach these labels to any time series or alerts when communicating with
   # external systems (federation, remote storage, Alertmanager).
   external_labels:
-      monitor: 'docker-host-alpha'
+    monitor: 'docker-host-alpha'
 
 # Load and evaluate rules in this file every 'evaluation_interval' seconds.
 rule_files:
@@ -29,10 +29,10 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.14:9100'
-          - '10.128.0.15:9100'
-          - '10.128.0.14:8080'
-          - '10.128.0.15:8080'
+          - '10.128.0.22:9100'
+          - '10.128.0.23:9100'
+          - '10.128.0.22:8080'
+          - '10.128.0.23:8080'
 
   - job_name: 'database'
     honor_timestamps: true
@@ -42,8 +42,8 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.12:9100'
-          - '10.128.0.12:8080'
+          - '10.128.0.24:9100'
+          - '10.128.0.24:8080'
 
   - job_name: 'ecommerce'
     honor_timestamps: true
@@ -53,10 +53,10 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.16:9100'
-          - '10.128.0.17:9100'
-          - '10.128.0.16:8080'
-          - '10.128.0.17:8080'
+          - '10.128.0.25:9100'
+          - '10.128.0.26:9100'
+          - '10.128.0.25:8080'
+          - '10.128.0.26:8080'
 
   - job_name: 'fileserver'
     honor_timestamps: true
@@ -66,8 +66,8 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.18:9100'
-          - '10.128.0.18:8080'
+          - '10.128.0.27:9100'
+          - '10.128.0.27:8080'
 
   - job_name: 'load-balancers'
     honor_timestamps: true
@@ -77,10 +77,10 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.19:9100'
-          - '10.128.0.20:9100'
-          - '10.128.0.19:8080'
-          - '10.128.0.20:8080'
+          - '10.128.0.28:9100'
+          - '10.128.0.29:9100'
+          - '10.128.0.28:8080'
+          - '10.128.0.29:8080'
 
   - job_name: 'monitoring-observium'
     honor_timestamps: true
@@ -90,7 +90,8 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.21:9100'
+          - '10.128.0.31:9100'
+          - '10.128.0.31:8080'
 
   - job_name: 'monitoring-portainer'
     honor_timestamps: true
@@ -100,12 +101,12 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '10.128.0.21:9100'
-          - '10.128.0.21:8080'
+          - '10.128.0.33:9100'
+          - '10.128.0.33:8080'
 
 alerting:
   alertmanagers:
-  - scheme: http
-    static_configs:
-    - targets: 
-      - 'alertmanager:9093'
+    - scheme: http
+      static_configs:
+        - targets:
+            - 'alertmanager:9093'

@@ -1,18 +1,12 @@
-
 networks:
   monitor-net:
     driver: bridge
 
 volumes:
-    prometheus_data: {}
-    grafana_data: {}
-    caddy_data:
-      name: caddy_data
-    caddy_config:
-      name: caddy_config
+  prometheus_data: {}
+  grafana_data: {}
 
 services:
-
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
@@ -27,8 +21,8 @@ services:
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
     restart: unless-stopped
-    expose:
-      - 9090
+    ports:
+      - "9090:9090"
     networks:
       - monitor-net
     labels:
@@ -43,8 +37,8 @@ services:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
     restart: unless-stopped
-    expose:
-      - 9093
+    ports:
+      - "9093:9093"
     networks:
       - monitor-net
     labels:
@@ -63,8 +57,8 @@ services:
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($$|/)'
     restart: unless-stopped
-    expose:
-      - 9100
+    ports:
+      - "9100:9100"
     networks:
       - monitor-net
     labels:
@@ -83,8 +77,8 @@ services:
     privileged: true
     devices:
       - /dev/kmsg
-    expose:
-      - 8080
+    ports:
+      - "8080:8080"
     networks:
       - monitor-net
     labels:
@@ -97,12 +91,12 @@ services:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning:/etc/grafana/provisioning
     environment:
-      - GF_SECURITY_ADMIN_USER=${ADMIN_USER}
-      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      - GF_SECURITY_ADMIN_USER=Mitigas
+      - GF_SECURITY_ADMIN_PASSWORD=mitigasi123
       - GF_USERS_ALLOW_SIGN_UP=false
     restart: unless-stopped
-    expose:
-      - 3000
+    ports:
+      - "3000:3000"
     networks:
       - monitor-net
     labels:
@@ -112,29 +106,8 @@ services:
     image: prom/pushgateway:latest
     container_name: pushgateway
     restart: unless-stopped
-    expose:
-      - 9091
-    networks:
-      - monitor-net
-    labels:
-      org.label-schema.group: "monitoring"
-
-  caddy:
-    image: caddy:latest
-    restart: unless-stopped
-    cap_add:
-      - NET_ADMIN
     ports:
-      - "3000:3000"  # Port untuk Grafana
-      - "9090:9090"  # Port untuk Prometheus
-      - "9093:9093"  # Port untuk Alertmanager
-      - "9091:9091"  # Port untuk Pushgateway
-      - "9100:9100"  # Port untuk Node Exporter
-    volumes:
-      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-      - ./site:/srv
-      - caddy_data:/data
-      - caddy_config:/config
+      - "9091:9091"
     networks:
       - monitor-net
     labels:

@@ -23,3 +23,9 @@ gcloud compute --project=mitigas-final firewall-rules create allow-phpldapadmin 
 
 # Allow Keycloak: keycloak
 gcloud compute --project=mitigas-final firewall-rules create allow-keycloak --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:8081 --source-ranges=0.0.0.0/0 --target-tags=allow-keycloak
+
+# Allow node_exporter: all nodes running node_exporter
+gcloud compute --project=mitigas-final firewall-rules create allow-node-exporter --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:9100 --source-ranges=0.0.0.0/0 --target-tags=allow-node-exporter
+
+# Allow cAdvisor: all nodes running cAdvisor
+gcloud compute --project=mitigas-final firewall-rules create allow-cadvisor --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:8080 --source-ranges=0.0.0.0/0 --target-tags=allow-cadvisor
