@@ -141,6 +141,8 @@ Anda juga dapat menggunakan Ansible untuk mengelola konfigurasi Portainer dan Do
 
 Setelah service berjalan, Anda dapat mengakses Portainer melalui browser menggunakan URL `https://<ip_external>:9443/` untuk mengakses Portainer. Untuk setiap host yang ingin dimonitor, jalankan agen Portainer dan tambahkan agen dengan memasukkan `ip_internal:9001` dan nama agen tersebut. Jika menggunakan `ip_external`, konfigurasikan firewall di host yang akan dimonitor agar port 9001 dapat diakses dari luar.
 
+![Portainer Dashboard](image/portainer-web.png)
+
 ## Informasi Tambahan
 
 Untuk informasi lebih lanjut tentang menggunakan dan mengkonfigurasi Portainer di Docker, silakan merujuk ke dokumentasi resmi Portainer dan Docker:
