@@ -1,0 +1,21 @@
+---
+- name: Deploy Portainer on monitoring-portainer instance
+  hosts: monitoring_portainer_service
+  become: true
+  tasks:
+    - name: Run docker compose down
+      command: docker compose down
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/Portainer
+      become: true
+
+    - name: Remove specific Docker volume
+      command: docker volume rm portainer-portainer-data
+      ignore_errors: true
+      become: true
+
+    - name: Run docker compose up
+      command: docker compose up -d
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/Portainer
+      become: true

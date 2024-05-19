@@ -1,0 +1,19 @@
+- name: Deploy Portainer Agent using Docker Compose on portainer_agent
+  hosts: portainer_agent
+  become: true
+  tasks:
+    - name: Run Docker Compose down
+      command: docker compose down
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/Portainer/Agent
+      ignore_errors: true
+
+    - name: Remove specific Docker volume
+      command: docker volume rm agent-portainer-agent-data
+      ignore_errors: true
+      become: true
+
+    - name: Run Docker Compose up
+      command: docker compose up -d
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/Portainer/Agent
