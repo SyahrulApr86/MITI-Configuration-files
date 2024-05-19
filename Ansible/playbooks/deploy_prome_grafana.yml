@@ -1,0 +1,18 @@
+- name: Run docker-compose down and up on monitoring-prome-grafana instances
+  hosts: monitoring-prome-grafana
+  become: true
+  tasks:
+    - name: Run docker compose down
+      command: docker compose down
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/Prometheus-Grafana
+
+    - name: Remove specific Docker volumes
+      command: docker volume rm prometheus-grafana_grafana_data prometheus-grafana_prometheus_data
+      ignore_errors: true
+      become: true
+
+    - name: Run docker compose up
+      command: docker compose up -d
+      args:
+        chdir: /home/apriansyah_syahrul/Mitigas/Prometheus-Grafana

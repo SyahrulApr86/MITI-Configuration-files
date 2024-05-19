@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Allow SNMP: all
-gcloud compute --project=mitigas-final firewall-rules create allow-snmp --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=udp:161,udp:162 --source-ranges=0.0.0.0/0 --target-tags=allow-snmp
-
 # Allow MySQL: db
 gcloud compute --project=mitigas-final firewall-rules create allow-mysql --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:3306 --source-ranges=0.0.0.0/0 --target-tags=allow-mysql
 
@@ -29,3 +26,15 @@ gcloud compute --project=mitigas-final firewall-rules create allow-node-exporter
 
 # Allow cAdvisor: all nodes running cAdvisor
 gcloud compute --project=mitigas-final firewall-rules create allow-cadvisor --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:8080 --source-ranges=0.0.0.0/0 --target-tags=allow-cadvisor
+
+# Allow Prometheus: prometheus
+gcloud compute --project=mitigas-final firewall-rules create allow-prometheus --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:9090 --source-ranges=0.0.0.0/0 --target-tags=allow-prometheus
+
+# Allow Alertmanager: alertmanager
+gcloud compute --project=mitigas-final firewall-rules create allow-alertmanager --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:9093 --source-ranges=0.0.0.0/0 --target-tags=allow-alertmanager
+
+# Allow Grafana: grafana
+gcloud compute --project=mitigas-final firewall-rules create allow-grafana --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:3000 --source-ranges=0.0.0.0/0 --target-tags=allow-grafana
+
+# Allow Pushgateway: pushgateway
+gcloud compute --project=mitigas-final firewall-rules create allow-pushgateway --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:9091 --source-ranges=0.0.0.0/0 --target-tags=allow-pushgateway
