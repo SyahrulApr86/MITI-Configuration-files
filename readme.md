@@ -39,7 +39,7 @@ Organisasi menggunakan instance berikut:
 
 Arsitektur proyek ini terdiri dari beberapa instance yang berjalan di GCP. Setiap instance berisi layanan yang berbeda dan dikonfigurasi untuk berkomunikasi satu sama lain. Berikut adalah arsitektur proyek:
 
-![arsitektur (3).png](docs/screenshots/arsitektur.png)
+![arsitektur (3).png](docs/screenshots/arsitektur-revisi.png)
 
 ## Prasyarat
 
