@@ -44,12 +44,11 @@ atau pada [Cara Instalasi Docker](../readme.md#instalasi-docker)
 
 Jika Anda ingin menyesuaikan konfigurasi, Anda dapat mengedit file `docker-compose.yml` dan `../.env`.
 
-Isi file `.env` yang berada di direktori atas `docker-compose.yml`:
+Isi file `.env` yang berada di direktori atas `docker-compose.yml`, dengan informasi berikut:
 ```bash
-MYSQL_ROOT_PASSWORD=mysqlrootpass
-MYSQL_USER=databaseuser
-MYSQL_PASSWORD=passworddatabaseuser
-MYSQL_DATABASE=initdb
+MYSQL_ROOT_PASSWORD=
+MYSQL_USER=
+MYSQL_PASSWORD=
 ```
 
 Contoh isi `docker-compose.yml` yang merujuk ke file `.env` di direktori atasnya:

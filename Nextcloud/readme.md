@@ -44,33 +44,17 @@ atau pada [Cara Instalasi Docker](../readme.md#instalasi-docker)
 
 ### Menyesuaikan File Template
 
-Jika Anda ingin menyesuaikan konfigurasi, Anda dapat mengedit file `Dockerfile.template`. Gantilah placeholder dengan nilai yang sesuai:
+Jika Anda ingin menyesuaikan konfigurasi, Anda dapat mengedit file `Dockerfile.template`. dan `../.env`.
 
-```Dockerfile
-FROM nextcloud:latest
-
-# Set environment variables
-ENV MYSQL_DATABASE=nextclouddb \
-    MYSQL_USER=databaseuser \
-    MYSQL_PASSWORD=passworddatabaseuser \
-    MYSQL_HOST=[Alamat_MySQL] \
-    NEXTCLOUD_ADMIN_USER=mitigas \
-    NEXTCLOUD_ADMIN_PASSWORD=mitigas123 \
-    NEXTCLOUD_TRUSTED_DOMAINS=[Alamat_Nextcloud]
-
-# Copy scripts to the image
-COPY update_ip.sh /usr/local/bin/update_ip.sh
-COPY add_trusted_domain.php /usr/local/bin/add_trusted_domain.php
-COPY custom_entrypoint.sh /custom_entrypoint.sh
-
-# Give execute permissions on the scripts
-RUN chmod +x /usr/local/bin/update_ip.sh
-RUN chmod +x /usr/local/bin/add_trusted_domain.php
-RUN chmod +x /custom_entrypoint.sh
-
-# Set the new custom entrypoint
-ENTRYPOINT ["/custom_entrypoint.sh"]
+Isi file `.env` yang berada di direktori atas `docker-compose.yml`, dengan informasi berikut:
+```bash
+MYSQL_PASSWORD=
+MYSQL_HOST=
+NEXTCLOUD_ADMIN_USER=
+NEXTCLOUD_ADMIN_PASSWORD=
+NEXTCLOUD_TRUSTED_DOMAINS=
 ```
+
 
 ### Membangun dan Menjalankan Container Nextcloud
 
@@ -83,7 +67,8 @@ ENTRYPOINT ["/custom_entrypoint.sh"]
 2. **Menjalankan Docker Compose:**
    Pastikan Anda berada di direktori yang berisi file `docker-compose.yml`, kemudian jalankan perintah berikut:
    ```bash
-   sudo docker compose up -d
+   sudo docker compose --env-file ../.env build --no-cache
+   sudo docker compose --env-file ../.env up -d
    ```
 
    Perintah ini akan mendownload image Nextcloud (jika belum ada), membuat container, dan menjalankan Nextcloud server dengan konfigurasi yang telah ditentukan.
