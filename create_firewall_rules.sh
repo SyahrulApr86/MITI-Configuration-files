@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Project ID
-PROJECT_ID=mitigas-final
 
 # Allow MySQL: db
 gcloud compute --project=${PROJECT_ID} firewall-rules create allow-mysql --direction=INGRESS --priority=1000 --network=default --action=ALLOW --rules=tcp:3306 --source-ranges=0.0.0.0/0 --target-tags=allow-mysql
