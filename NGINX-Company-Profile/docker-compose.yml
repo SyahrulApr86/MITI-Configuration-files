@@ -5,10 +5,11 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf.template:/etc/nginx/nginx.conf.template
+      - ./start-nginx.sh:/start-nginx.sh
     environment:
       - ECOMMERCE_IP_1=${ECOMMERCE_IP_1}
       - ECOMMERCE_IP_2=${ECOMMERCE_IP_2}
-    command: /bin/bash -c "envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"
+    command: /bin/bash -c "/start-nginx.sh"
     restart: always
 
 volumes:
