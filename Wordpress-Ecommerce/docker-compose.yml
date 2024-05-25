@@ -1,13 +1,13 @@
 services:
   wordpress_ecommerce:
-    image: wordpress:latest
+    image: wordpress:php8.3-apache
     restart: always
     ports:
       - 80:80
     environment:
-      WORDPRESS_DB_HOST: 10.128.0.24
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
       WORDPRESS_DB_USER: databaseuser
-      WORDPRESS_DB_PASSWORD: passworddatabaseuser
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_DB_NAME: wordpressecomm
     volumes:
       - wordpress_ecommerce_data:/var/www/html
