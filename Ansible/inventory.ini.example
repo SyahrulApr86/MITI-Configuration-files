@@ -1,0 +1,87 @@
+[all]
+company-profile-1 ansible_host=
+company-profile-2 ansible_host=
+db ansible_host=
+ecommerce-1 ansible_host=
+ecommerce-2 ansible_host=
+fileserver ansible_host=
+lb-company-profile ansible_host=
+lb-ecommerce ansible_host=
+ldap ansible_host=
+monitoring-observium ansible_host=
+monitoring-portainer ansible_host=
+monitoring-prome-grafana ansible_host=
+
+[company_profile]
+company-profile-1
+company-profile-2
+
+[ecommerce]
+ecommerce-1
+ecommerce-2
+
+[db_service]
+db
+
+[fileserver_service]
+fileserver
+
+[lb]
+lb-company-profile
+lb-ecommerce
+
+[monitoring_observium_service]
+monitoring-observium
+
+[monitoring_portainer_service]
+monitoring-portainer
+
+[monitoring_prome_grafana_service]
+monitoring-prome-grafana
+
+[ldap_service]
+ldap
+
+[node_exporter]
+company-profile-1
+company-profile-2
+ecommerce-1
+ecommerce-2
+db
+fileserver
+lb-company-profile
+lb-ecommerce
+ldap
+monitoring-observium
+monitoring-portainer
+
+[snmp]
+company-profile-1
+company-profile-2
+ecommerce-1
+ecommerce-2
+db
+fileserver
+lb-company-profile
+lb-ecommerce
+ldap
+monitoring-portainer
+monitoring-prome-grafana
+
+[portainer_agent]
+company-profile-1
+company-profile-2
+ecommerce-1
+ecommerce-2
+db
+fileserver
+lb-company-profile
+lb-ecommerce
+ldap
+monitoring-observium
+monitoring-prome-grafana
+
+[all:vars]
+ansible_user=
+ansible_ssh_private_key_file=
+user_home=

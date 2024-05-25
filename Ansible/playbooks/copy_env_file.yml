@@ -1,0 +1,16 @@
+- name: Copy .env file to Mitigas directory
+  hosts: all
+  become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
+  tasks:
+    - name: Copy .env file to {{ user_home }}/Mitigas
+      copy:
+        src: "{{ playbook_dir }}/../../.env"
+        dest: "{{ user_home }}/Mitigas/.env"
+        mode: '0644'
+      become: true
+
+    - name: Print the user_home variable
+      debug:
+        msg: "File copied to {{ user_home }}/Mitigas/.env from {{ playbook_dir }}/../../.env"
