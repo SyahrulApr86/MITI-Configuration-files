@@ -1,5 +1,5 @@
 global:
-  scrape_interval: 15s
+  scrape_interval: 5s
   evaluation_interval: 15s
   external_labels:
     monitor: 'docker-host-alpha'
@@ -15,7 +15,7 @@ scrape_configs:
 
   - job_name: 'nodeexporter'
     honor_timestamps: true
-    scrape_interval: 15s
+    scrape_interval: 5s
     scrape_timeout: 1m
     metrics_path: /metrics
     scheme: http
@@ -26,7 +26,7 @@ scrape_configs:
 
   - job_name: 'cadvisor'
     honor_timestamps: true
-    scrape_interval: 15s
+    scrape_interval: 5s
     scrape_timeout: 1m
     metrics_path: /metrics
     scheme: http
@@ -37,7 +37,7 @@ scrape_configs:
 
   - job_name: 'database'
     honor_timestamps: true
-    scrape_interval: 15s
+    scrape_interval: 5s
     scrape_timeout: 1m
     metrics_path: /metrics
     scheme: http
@@ -48,7 +48,7 @@ scrape_configs:
 
   - job_name: 'ecommerce'
     honor_timestamps: true
-    scrape_interval: 15s
+    scrape_interval: 5s
     scrape_timeout: 1m
     metrics_path: /metrics
     scheme: http
@@ -61,7 +61,7 @@ scrape_configs:
 
   - job_name: 'fileserver'
     honor_timestamps: true
-    scrape_interval: 15s
+    scrape_interval: 5s
     scrape_timeout: 1m
     metrics_path: /metrics
     scheme: http
@@ -72,7 +72,7 @@ scrape_configs:
 
   - job_name: 'load-balancers'
     honor_timestamps: true
-    scrape_interval: 15s
+    scrape_interval: 5s
     scrape_timeout: 1m
     metrics_path: /metrics
     scheme: http
@@ -85,7 +85,7 @@ scrape_configs:
 
   - job_name: 'monitoring-observium'
     honor_timestamps: true
-    scrape_interval: 15s
+    scrape_interval: 5s
     scrape_timeout: 1m
     metrics_path: /metrics
     scheme: http
@@ -96,7 +96,7 @@ scrape_configs:
 
   - job_name: 'monitoring-portainer'
     honor_timestamps: true
-    scrape_interval: 15s
+    scrape_interval: 5s
     scrape_timeout: 1m
     metrics_path: /metrics
     scheme: http
