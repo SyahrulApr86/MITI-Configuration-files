@@ -13,7 +13,8 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'nodeexporter'
+  # Node Exporter Jobs
+  - job_name: 'nodeexporter-company-profile'
     honor_timestamps: true
     scrape_interval: 15s
     scrape_timeout: 10s
@@ -21,10 +22,10 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '${NODE_EXPORTER_1}'
-          - '${NODE_EXPORTER_2}'
+          - '${NODE_EXPORTER_COMPANY_PROFILE_1}'
+          - '${NODE_EXPORTER_COMPANY_PROFILE_2}'
 
-  - job_name: 'cadvisor'
+  - job_name: 'nodeexporter-database'
     honor_timestamps: true
     scrape_interval: 15s
     scrape_timeout: 10s
@@ -32,10 +33,9 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '${CADVISOR_1}'
-          - '${CADVISOR_2}'
+          - '${NODE_EXPORTER_DB}'
 
-  - job_name: 'database'
+  - job_name: 'nodeexporter-ecommerce'
     honor_timestamps: true
     scrape_interval: 15s
     scrape_timeout: 10s
@@ -43,10 +43,10 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '${DATABASE_1}'
-          - '${DATABASE_2}'
+          - '${NODE_EXPORTER_ECOMMERCE_1}'
+          - '${NODE_EXPORTER_ECOMMERCE_2}'
 
-  - job_name: 'ecommerce'
+  - job_name: 'nodeexporter-fileserver'
     honor_timestamps: true
     scrape_interval: 15s
     scrape_timeout: 10s
@@ -54,12 +54,9 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '${ECOMMERCE_1}'
-          - '${ECOMMERCE_2}'
-          - '${ECOMMERCE_3}'
-          - '${ECOMMERCE_4}'
+          - '${NODE_EXPORTER_FILESERVER}'
 
-  - job_name: 'fileserver'
+  - job_name: 'nodeexporter-load-balancers'
     honor_timestamps: true
     scrape_interval: 15s
     scrape_timeout: 10s
@@ -67,10 +64,10 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '${FILESERVER_1}'
-          - '${FILESERVER_2}'
+          - '${NODE_EXPORTER_LB_COMPANY_PROFILE}'
+          - '${NODE_EXPORTER_LB_ECOMMERCE}'
 
-  - job_name: 'load-balancers'
+  - job_name: 'nodeexporter-ldap'
     honor_timestamps: true
     scrape_interval: 15s
     scrape_timeout: 10s
@@ -78,12 +75,9 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '${LOAD_BALANCER_1}'
-          - '${LOAD_BALANCER_2}'
-          - '${LOAD_BALANCER_3}'
-          - '${LOAD_BALANCER_4}'
+          - '${NODE_EXPORTER_LDAP}'
 
-  - job_name: 'monitoring-observium'
+  - job_name: 'nodeexporter-monitoring'
     honor_timestamps: true
     scrape_interval: 15s
     scrape_timeout: 10s
@@ -91,10 +85,11 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '${MONITORING_OBSERVIUM_1}'
-          - '${MONITORING_OBSERVIUM_2}'
+          - '${NODE_EXPORTER_MONITORING_OBSERVIUM}'
+          - '${NODE_EXPORTER_MONITORING_PORTAINER}'
 
-  - job_name: 'monitoring-portainer'
+  # cAdvisor Jobs
+  - job_name: 'cadvisor-company-profile'
     honor_timestamps: true
     scrape_interval: 15s
     scrape_timeout: 10s
@@ -102,8 +97,71 @@ scrape_configs:
     scheme: http
     static_configs:
       - targets:
-          - '${MONITORING_PORTAINER_1}'
-          - '${MONITORING_PORTAINER_2}'
+          - '${CADVISOR_COMPANY_PROFILE_1}'
+          - '${CADVISOR_COMPANY_PROFILE_2}'
+
+  - job_name: 'cadvisor-database'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${CADVISOR_DB}'
+
+  - job_name: 'cadvisor-ecommerce'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${CADVISOR_ECOMMERCE_1}'
+          - '${CADVISOR_ECOMMERCE_2}'
+
+  - job_name: 'cadvisor-fileserver'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${CADVISOR_FILESERVER}'
+
+  - job_name: 'cadvisor-load-balancers'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${CADVISOR_LB_COMPANY_PROFILE}'
+          - '${CADVISOR_LB_ECOMMERCE}'
+
+  - job_name: 'cadvisor-ldap'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${CADVISOR_LDAP}'
+
+  - job_name: 'cadvisor-monitoring'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${CADVISOR_MONITORING_OBSERVIUM}'
+          - '${CADVISOR_MONITORING_PORTAINER}'
 
 alerting:
   alertmanagers:
