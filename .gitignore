@@ -687,3 +687,7 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+!/gcloud.env
+gcloud.env/
+/gcloud.env
+./gcloud.env
