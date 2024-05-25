@@ -1,0 +1,3 @@
+---
+- name: Include playbook
+  include_tasks: "{{ playbook }}"

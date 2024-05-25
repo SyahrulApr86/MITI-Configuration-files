@@ -1,0 +1,99 @@
+---
+- name: Execute all playbooks in order
+  hosts: localhost
+  tasks:
+    - name: Install Docker
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/install_docker.yml"
+
+    - name: Clone Repository
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/clone_repository.yml"
+
+    - name: Copy .env File
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/copy_env_file.yml"
+
+    - name: Deploy Database
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_db.yml"
+
+    - name: Deploy Company Profile
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_company_profile.yml"
+
+    - name: Deploy Ecommerce
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_ecommerce.yml"
+
+    - name: Deploy Fileserver
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_fileserver.yml"
+
+    - name: Deploy LDAP
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_ldap.yml"
+
+    - name: Deploy Load Balancer for Company Profile
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_lb_company_profile.yml"
+
+    - name: Deploy Load Balancer for Ecommerce
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_lb_ecommerce.yml"
+
+    - name: Deploy Portainer
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_portainer.yml"
+
+    - name: Deploy Portainer Agent
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_portainer_agent.yml"
+
+    - name: Deploy Exporter
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_exporter.yml"
+
+    - name: Deploy Prometheus and Grafana
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/deploy_prome_grafana.yml"
+
+    - name: Install SNMP
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/install_snmp.yml"
+
+    - name: Add Observium Device
+      include_role:
+        name: include_playbook
+      vars:
+        playbook: "playbooks/add_observium_device.yml"
