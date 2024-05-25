@@ -10,8 +10,8 @@ http {
     access_log /var/log/nginx/access.log main;
 
     upstream wordpress_backend {
-        server [IP_ECOMMERCE_1];  # IP internal dari ecommerce-1
-        server [IP_ECOMMERCE_2];  # IP internal dari ecommerce-2
+        server ${COMPANY_1};  # IP internal dari company-profile-1
+        server ${COMPANY_2};  # IP internal dari company-profile-2
     }
 
     server {
@@ -19,10 +19,10 @@ http {
 
         location / {
             proxy_pass http://wordpress_backend;
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
+            proxy_set_header Host ${DOLLAR}host;
+            proxy_set_header X-Real-IP ${DOLLAR}remote_addr;
+            proxy_set_header X-Forwarded-For ${DOLLAR}proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto ${DOLLAR}scheme;
         }
     }
 }

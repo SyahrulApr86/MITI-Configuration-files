@@ -7,8 +7,8 @@ services:
       - ./nginx.conf.template:/etc/nginx/nginx.conf.template
       - ./start-nginx.sh:/start-nginx.sh
     environment:
-      - ECOMMERCE_IP_1=${ECOMMERCE_IP_1}
-      - ECOMMERCE_IP_2=${ECOMMERCE_IP_2}
+      - COMPANY_1=${COMPANY_1}
+      - COMPANY_2=${COMPANY_2}
     command: /bin/bash -c "chmod +x /start-nginx.sh && /start-nginx.sh"
     restart: always
 
