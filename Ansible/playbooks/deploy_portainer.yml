@@ -1,21 +1,21 @@
----
 - name: Deploy Portainer on monitoring-portainer instance
   hosts: monitoring_portainer_service
   become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
   tasks:
     - name: Run docker compose down
-      command: docker compose down
+      command: docker compose down -v
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Portainer
-      become: true
-
-    - name: Remove specific Docker volume
-      command: docker volume rm portainer-portainer-data
-      ignore_errors: true
+        chdir: "{{ user_home }}/Mitigas/Portainer"
       become: true
 
     - name: Run docker compose up
       command: docker compose up -d
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Portainer
+        chdir: "{{ user_home }}/Mitigas/Portainer"
       become: true
+
+    - name: Print the user_home variable
+      debug:
+        msg: "The user_home variable is set to {{ user_home }}"

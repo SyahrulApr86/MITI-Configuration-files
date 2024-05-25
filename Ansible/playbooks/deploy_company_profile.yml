@@ -1,16 +1,19 @@
 - name: Run docker compose down and up on company profile instances
   hosts: company_profile
   become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
   tasks:
-    - name: Run docker compose down
-      command: docker compose down
+    - name: Run docker compose down with volumes
+      command: docker compose down -v
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Wordpress-Company-Profile
-
-    - name: Remove specific Docker volume
-      command: sudo docker volume rm wordpress-company-profile_wordpress_web_data
+        chdir: "{{ user_home }}/Mitigas/Wordpress-Company-Profile"
 
     - name: Run docker compose up
       command: docker compose up -d
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Wordpress-Company-Profile
+        chdir: "{{ user_home }}/Mitigas/Wordpress-Company-Profile"
+
+    - name: Print the user_home variable
+      debug:
+        msg: "The user_home variable is set to {{ user_home }}"

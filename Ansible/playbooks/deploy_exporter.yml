@@ -1,18 +1,19 @@
 - name: Run docker-compose down and up on node_exporter instances
   hosts: node_exporter
   become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
   tasks:
     - name: Run docker compose down
-      command: docker compose down
+      command: docker compose down -v
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Prometheus-Grafana/exporter
-
-    - name: Remove specific Docker volumes
-      command: docker volume rm node_exporter_data cadvisor_data
-      ignore_errors: true
-      become: true
+        chdir: "{{ user_home }}/Mitigas/Prometheus-Grafana/exporter"
 
     - name: Run docker compose up
       command: docker compose up -d
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Prometheus-Grafana/exporter
+        chdir: "{{ user_home }}/Mitigas/Prometheus-Grafana/exporter"
+
+    - name: Print the user_home variable
+      debug:
+        msg: "The user_home variable is set to {{ user_home }}"

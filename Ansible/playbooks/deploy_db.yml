@@ -1,17 +1,19 @@
 - name: Run docker compose down and up on db instance
   hosts: db
   become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
   tasks:
-    - name: Run docker compose down
-      command: docker compose down
+    - name: Run docker compose down with volumes
+      command: docker compose down -v
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/MySQL
-
-    - name: Remove specific Docker volume
-      command: docker volume rm mysql_db_data
-      become: true
+        chdir: "{{ user_home }}/Mitigas/MySQL"
 
     - name: Run docker compose up
       command: docker compose up -d
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/MySQL
+        chdir: "{{ user_home }}/Mitigas/MySQL"
+
+    - name: Print the user_home variable
+      debug:
+        msg: "The user_home variable is set to {{ user_home }}"

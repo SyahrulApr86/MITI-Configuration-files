@@ -1,10 +1,12 @@
 - name: Install git and clone/pull repository on all instances
   hosts: all
   become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
   tasks:
     - name: Ensure the destination directory exists
       file:
-        path: '/home/apriansyah_syahrul/Mitigas'
+        path: "{{ user_home }}/Mitigas"
         state: directory
         mode: '0755'
       become: true
@@ -12,7 +14,11 @@
     - name: Clone or pull the MITI-Configuration-files repository
       git:
         repo: 'https://github.com/SyahrulApr86/MITI-Configuration-files.git'
-        dest: '/home/apriansyah_syahrul/Mitigas'
+        dest: "{{ user_home }}/Mitigas"
         version: 'HEAD'
         force: yes
       become: true
+
+    - name: Print the user_home variable
+      debug:
+        msg: "The user_home variable is set to {{ user_home }}"

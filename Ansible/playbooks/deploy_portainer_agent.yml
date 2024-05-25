@@ -1,19 +1,20 @@
 - name: Deploy Portainer Agent using Docker Compose on portainer_agent
   hosts: portainer_agent
   become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
   tasks:
     - name: Run Docker Compose down
-      command: docker compose down
+      command: docker compose down -v
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Portainer/Agent
+        chdir: "{{ user_home }}/Mitigas/Portainer/Agent"
       ignore_errors: true
-
-    - name: Remove specific Docker volume
-      command: docker volume rm agent-portainer-agent-data
-      ignore_errors: true
-      become: true
 
     - name: Run Docker Compose up
       command: docker compose up -d
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Portainer/Agent
+        chdir: "{{ user_home }}/Mitigas/Portainer/Agent"
+
+    - name: Print the user_home variable
+      debug:
+        msg: "The user_home variable is set to {{ user_home }}"

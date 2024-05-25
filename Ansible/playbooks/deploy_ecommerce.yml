@@ -1,18 +1,19 @@
 - name: Run docker compose down and up on ecommerce instances
   hosts: ecommerce
   become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
   tasks:
     - name: Run docker compose down
-      command: docker compose down
+      command: docker compose down -v
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Wordpress-Ecommerce
-
-    - name: Remove specific Docker volume
-      command: docker volume rm wordpress-ecommerce_wordpress_ecommerce_data
-      ignore_errors: yes
-      become: true
+        chdir: "{{ user_home }}/Mitigas/Wordpress-Ecommerce"
 
     - name: Run docker compose up
       command: docker compose up -d
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Wordpress-Ecommerce
+        chdir: "{{ user_home }}/Mitigas/Wordpress-Ecommerce"
+
+    - name: Print the user_home variable
+      debug:
+        msg: "The user_home variable is set to {{ user_home }}"

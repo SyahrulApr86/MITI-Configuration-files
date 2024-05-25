@@ -1,18 +1,19 @@
 - name: Run docker compose down and up for LDAP on ldap
   hosts: ldap
   become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
   tasks:
     - name: Run docker compose down
-      command: docker compose down
+      command: docker compose down -v
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/LDAP
-
-    - name: Remove specific Docker volumes
-      command: docker volume rm ldap_data_certificates ldap_slapd_database ldap_slapd_config
-      ignore_errors: yes
-      become: true
+        chdir: "{{ user_home }}/Mitigas/LDAP"
 
     - name: Run docker compose up
       command: docker compose up -d
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/LDAP
+        chdir: "{{ user_home }}/Mitigas/LDAP"
+
+    - name: Print the user_home variable
+      debug:
+        msg: "The user_home variable is set to {{ user_home }}"

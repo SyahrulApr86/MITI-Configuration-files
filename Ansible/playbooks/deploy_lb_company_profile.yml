@@ -1,18 +1,19 @@
 - name: Run docker compose down and up on lb-company-profile
   hosts: lb-company-profile
   become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
   tasks:
     - name: Run docker compose down
-      command: docker compose down
+      command: docker compose down -v
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/NGINX-Company-Profile
-
-    - name: Remove specific Docker volume
-      command: docker volume rm nginx-company-profile_nginx_company_profile_data
-      ignore_errors: yes
-      become: true
+        chdir: "{{ user_home }}/Mitigas/NGINX-Company-Profile"
 
     - name: Run docker compose up
       command: docker compose up -d
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/NGINX-Company-Profile
+        chdir: "{{ user_home }}/Mitigas/NGINX-Company-Profile"
+
+    - name: Print the user_home variable
+      debug:
+        msg: "The user_home variable is set to {{ user_home }}"

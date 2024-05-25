@@ -11,6 +11,9 @@
 6. [Menguji Koneksi ke Host](#menguji-koneksi-ke-host)
 7. [Menulis Playbook Ansible](#menulis-playbook-ansible)
 8. [Menjalankan Playbook](#menjalankan-playbook)
+9. [Contoh Playbook Ansible Lainnya](#contoh-playbook-ansible-lainnya)
+    - [Clone Repository dari GitHub](#clone-repository-dari-github)
+    - [Docker Compose Up](#docker-compose-up)
 
 ## Apa itu Ansible?
 
@@ -354,3 +357,64 @@ Pastikan Anda mengganti `host_yang_ingin_diinstall` dengan nama host yang ingin 
 ```bash
 ansible-playbook -i inventory.ini playbooks/docker_compose_up.yml
 ```
+
+## Menggunakan Environment Variables di Ansible Playbook
+
+Anda dapat menggunakan environment variables di Ansible playbook untuk mengatur variabel yang dinamis dan konfigurasinya dapat dengan mudah diubah tanpa harus mengedit playbook secara langsung. Berikut adalah contoh bagaimana menggunakan environment variables di Ansible playbook:
+
+### Contoh Playbook dengan Environment Variables
+
+Misalnya, Anda memiliki environment variable `USER_HOME` yang menyimpan path direktori home pengguna, dan Anda ingin menggunakan variabel ini di playbook Anda.
+
+1. Pertama, pastikan environment variable sudah diatur di sistem Anda. Anda bisa melakukannya dengan menambahkan baris berikut ke `.bashrc` atau `.profile` Anda:
+    ```sh
+    export USER_HOME=/home/apriansyah_syahrul
+    ```
+
+2. Selanjutnya, gunakan `lookup('env', 'VARIABLE_NAME')` di playbook Anda untuk mengakses environment variable tersebut. Berikut adalah contoh playbook yang menggunakan environment variable `USER_HOME`:
+
+### `playbooks/clone_repository_with_env.yml`
+
+```yaml
+- name: Install git and clone/pull repository on all instances
+  hosts: all
+  become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home/default_user') }}"
+  tasks:
+    - name: Update all packages using the apt repository
+      apt:
+        update_cache: yes
+      become: true
+
+    - name: Install git
+      apt:
+        name: git
+        state: present
+      become: true
+
+    - name: Ensure the destination directory exists
+      file:
+        path: '{{ user_home }}/Mitigas'
+        state: directory
+        mode: '0755'
+      become: true
+
+    - name: Clone or pull the MITI-Configuration-files repository
+      git:
+        repo: 'https://github.com/SyahrulApr86/MITI-Configuration-files.git'
+        dest: '{{ user_home }}/Mitigas'
+        version: 'HEAD'
+        force: yes
+      become: true
+```
+
+### Menjalankan Playbook
+
+Setelah Anda membuat playbook, Anda bisa menjalankannya dengan perintah berikut:
+
+```sh
+ansible-playbook -i inventory.ini playbooks/clone_repository_with_env.yml
+```
+
+Dengan menggunakan environment variables, Anda dapat membuat playbook Ansible yang lebih fleksibel dan mudah dikonfigurasi sesuai dengan lingkungan eksekusi. Hal ini sangat berguna dalam skenario deployment dan konfigurasi yang beragam.

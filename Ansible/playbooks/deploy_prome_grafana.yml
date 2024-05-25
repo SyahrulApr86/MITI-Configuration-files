@@ -1,18 +1,19 @@
 - name: Run docker-compose down and up on monitoring-prome-grafana instances
   hosts: monitoring-prome-grafana
   become: true
+  vars:
+    user_home: "{{ lookup('env', 'USER_HOME') | default('/home') }}"
   tasks:
     - name: Run docker compose down
-      command: docker compose down
+      command: docker compose down -v
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Prometheus-Grafana
-
-    - name: Remove specific Docker volumes
-      command: docker volume rm prometheus-grafana_grafana_data prometheus-grafana_prometheus_data
-      ignore_errors: true
-      become: true
+        chdir: "{{ user_home }}/Mitigas/Prometheus-Grafana"
 
     - name: Run docker compose up
       command: docker compose up -d
       args:
-        chdir: /home/apriansyah_syahrul/Mitigas/Prometheus-Grafana
+        chdir: "{{ user_home }}/Mitigas/Prometheus-Grafana"
+
+    - name: Print the user_home variable
+      debug:
+        msg: "The user_home variable is set to {{ user_home }}"
