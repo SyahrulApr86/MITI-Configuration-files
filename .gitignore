@@ -691,3 +691,8 @@ fabric.properties
 gcloud.env/
 /gcloud.env
 ./gcloud.env
+
+!/.env
+/.env
+.env
+./.env

@@ -85,17 +85,25 @@ Setelah langkah-langkah ini selesai, permintaan Anda untuk meningkatkan kuota ak
 
 Skrip berikut mengotomatisasi pembuatan instance yang diperlukan di GCP menggunakan perintah CLI. Simpan skrip ini sebagai `create_instances.sh` dan jalankan untuk membuat semua instance.
 
+(Sebelum menjalankan skrip ini, pastikan Anda telah membuat file `gcloud.env` yang berisi informasi proyek GCP Anda. File ini berisi variabel `PROJECT`, `PROJECT_ID` dan `SERVICE_ACCOUNT` yang digunakan dalam skrip ini dan skrip lainnya, Anda dapat melihat template file `gcloud.env` di [sini](gcloud.env.example)).
+
 ```bash
 #!/bin/bash
 
-PROJECT="mitigas-final"
+source gcloud.env
+
+# Ganti dengan zona yang Anda gunakan dalam proyek baru
 ZONE="us-central1-c"
+# Ganti dengan tipe mesin yang Anda inginkan, mungkin tidak perlu diubah kecuali jika menggunakan tipe mesin yang berbeda
 MACHINE_TYPE="e2-small"
-IMAGE="projects/ubuntu-os-cloud/global/images/ubuntu-2004-focal-v20240515"
+# Image OS yang digunakan, mungkin tidak perlu diubah kecuali jika menggunakan image yang berbeda
+IMAGE="projects/ubuntu-os-cloud/global/images/ubuntu-2004-focal-v20240519"
+# Konfigurasi jaringan, mungkin tidak perlu diubah
 NETWORK_INTERFACE="network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=default"
+# Tipe disk, mungkin tidak perlu diubah kecuali jika menggunakan tipe disk yang berbeda
 DISK_TYPE="pd-balanced"
-TAGS="http-server,https-server,lb-health-check"
-SERVICE_ACCOUNT="534129012887-compute@developer.gserviceaccount.com"
+
+# Cakupan API, mungkin tidak perlu diubah
 SCOPES="https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append"
 
 create_instance() {
@@ -108,7 +116,7 @@ create_instance() {
         --provisioning-model=STANDARD \
         --service-account=$SERVICE_ACCOUNT \
         --scopes=$SCOPES \
-        --tags=$TAGS \
+        --tags=$2 \
         --create-disk=auto-delete=yes,boot=yes,device-name=$1,image=$IMAGE,mode=rw,size=10,type=projects/$PROJECT/zones/$ZONE/diskTypes/$DISK_TYPE \
         --no-shielded-secure-boot \
         --shielded-vtpm \
@@ -117,18 +125,18 @@ create_instance() {
         --reservation-affinity=any
 }
 
-create_instance "company-profile-1"
-create_instance "company-profile-2"
-create_instance "db"
-create_instance "ecommerce-1"
-create_instance "ecommerce-2"
-create_instance "fileserver"
-create_instance "lb-company-profile"
-create_instance "lb-ecommerce"
-create_instance "ldap"
-create_instance "monitoring-observium"
-create_instance "monitoring-prome-grafana"
-create_instance "monitoring-portainer"
+create_instance "company-profile-1" "allow-http,allow-https,allow-cadvisor,allow-node-exporter"
+create_instance "company-profile-2" "allow-http,allow-https,allow-cadvisor,allow-node-exporter"
+create_instance "db" "allow-mysql,allow-cadvisor,allow-node-exporter"
+create_instance "ecommerce-1" "allow-http,allow-https,allow-cadvisor,allow-node-exporter"
+create_instance "ecommerce-2" "allow-http,allow-https,allow-cadvisor,allow-node-exporter"
+create_instance "fileserver" "allow-http,allow-https,allow-cadvisor,allow-node-exporter"
+create_instance "lb-company-profile" "allow-http,allow-https,allow-cadvisor,allow-node-exporter"
+create_instance "lb-ecommerce" "allow-http,allow-https,allow-cadvisor,allow-node-exporter"
+create_instance "ldap" "allow-ldap,allow-ldaps,allow-phpldapadmin,allow-cadvisor,allow-node-exporter,allow-keycloak"
+create_instance "monitoring-observium" "allow-node-exporter,allow-cadvisor,allow-http,allow-https"
+create_instance "monitoring-prome-grafana" "allow-prometheus,allow-alertmanager,allow-grafana,allow-pushgateway,allow-cadvisor,allow-node-exporter"
+create_instance "monitoring-portainer" "allow-portainer,allow-cadvisor,allow-node-exporter"
 ```
 
 ### Cara Menggunakan

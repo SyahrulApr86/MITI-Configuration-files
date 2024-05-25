@@ -9,18 +9,18 @@ Repositori ini berisi file konfigurasi untuk menjalankan server database MySQL m
 
 - [Struktur Direktori](#struktur-direktori)
 - [Cara Menggunakan](#cara-menggunakan)
-  - [Prasyarat](#prasyarat)
-  - [Menyesuaikan File Template](#menyesuaikan-file-template)
-  - [Menjalankan Container MySQL](#menjalankan-container-mysql)
-  - [Mengakses MySQL Server](#mengakses-mysql-server)
-  - [Inisialisasi Database](#inisialisasi-database)
-  - [Troubleshooting](#troubleshooting)
-  - [Port yang Digunakan](#port-yang-digunakan)
-    - [Langkah-langkah Membuka Port](#langkah-langkah-membuka-port)
-      - [Di Docker Host](#di-docker-host)
-      - [Di Google Cloud Platform (GCP)](#di-google-cloud-platform-gcp)
-  - [Konfigurasi Dengan Ansible](#konfigurasi-dengan-ansible)
-  - [Informasi Tambahan](#informasi-tambahan)
+    - [Prasyarat](#prasyarat)
+    - [Menyesuaikan File Template](#menyesuaikan-file-template)
+    - [Menjalankan Container MySQL](#menjalankan-container-mysql)
+    - [Mengakses MySQL Server](#mengakses-mysql-server)
+    - [Inisialisasi Database](#inisialisasi-database)
+    - [Troubleshooting](#troubleshooting)
+    - [Port yang Digunakan](#port-yang-digunakan)
+        - [Langkah-langkah Membuka Port](#langkah-langkah-membuka-port)
+            - [Di Docker Host](#di-docker-host)
+            - [Di Google Cloud Platform (GCP)](#di-google-cloud-platform-gcp)
+    - [Konfigurasi Dengan Ansible](#konfigurasi-dengan-ansible)
+    - [Informasi Tambahan](#informasi-tambahan)
 
 ## Struktur Direktori
 
@@ -42,8 +42,17 @@ atau pada [Cara Instalasi Docker](../readme.md#instalasi-docker)
 
 ### Menyesuaikan File Template
 
-Jika Anda ingin menyesuaikan konfigurasi, Anda dapat mengedit file `docker-compose.yml.template`. Gantilah placeholder dengan nilai yang sesuai:
+Jika Anda ingin menyesuaikan konfigurasi, Anda dapat mengedit file `docker-compose.yml` dan `../.env`.
 
+Isi file `.env` yang berada di direktori atas `docker-compose.yml`:
+```bash
+MYSQL_ROOT_PASSWORD=mysqlrootpass
+MYSQL_USER=databaseuser
+MYSQL_PASSWORD=passworddatabaseuser
+MYSQL_DATABASE=initdb
+```
+
+Contoh isi `docker-compose.yml` yang merujuk ke file `.env` di direktori atasnya:
 ```yaml
 services:
   db:
@@ -51,11 +60,13 @@ services:
     restart: always
     ports:
       - 3306:3306
+    env_file:
+      - ../.env
     environment:
-      MYSQL_ROOT_PASSWORD: [password] # password untuk user 'root'
-      MYSQL_USER: [username] # username untuk user baru, user ini akan mendapat izin sebagai superuser
-      MYSQL_PASSWORD: [password] # password untuk user baru
-      MYSQL_DATABASE: [database] # nama database yang akan dibuat secara otomatis saat container pertama kali dijalankan
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
     command: --default-authentication-plugin=caching_sha2_password
     volumes:
       - db_data:/var/lib/mysql
@@ -70,13 +81,13 @@ volumes:
 1. **Kloning Repositori:**
    ```bash
    git clone https://github.com/SyahrulApr86/MITI-Configuration-files.git
-   cd MITI-Configuration-files/MySQL
+   cd MITI-Configuration-files/MySQL/docker
    ```
 
 2. **Menjalankan Docker Compose:**
-   Pastikan Anda berada di direktori yang berisi file `docker-compose.yml`, kemudian jalankan perintah berikut:
+   Pastikan Anda berada di direktori `docker` yang berisi file `docker-compose.yml`, kemudian jalankan perintah berikut:
    ```bash
-   sudo docker compose up -d
+   sudo docker compose --env-file ../.env up -d
    ```
 
    Perintah ini akan mendownload image MySQL (jika belum ada), membuat container, dan menjalankan MySQL server dengan konfigurasi yang telah ditentukan.

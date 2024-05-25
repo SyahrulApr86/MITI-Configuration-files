@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source gcloud.env
+
 # Ganti dengan zona yang Anda gunakan dalam proyek baru
 ZONE="us-central1-c"
 # Ganti dengan tipe mesin yang Anda inginkan, mungkin tidak perlu diubah kecuali jika menggunakan tipe mesin yang berbeda
