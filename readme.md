@@ -56,7 +56,7 @@ Sebelum membuat instance di GCP, pastikan Anda memiliki kuota "In-use IP address
     - Kunjungi halaman [Quotas](https://console.cloud.google.com/iam-admin/quotas).
 
 2. **Filter Kuota:**
-    - Klik tombol filter (`filter_list`) untuk memfilter kuota berdasarkan properti spesifik.
+    - Klik tombol filter untuk memfilter kuota berdasarkan properti spesifik.
     - Gunakan kotak pencarian Filter untuk mencari kuota "In-use IP addresses"
 
 3. **Pilih Kuota "In-use IP addresses":**

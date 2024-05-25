@@ -4,8 +4,12 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx.conf.template:/etc/nginx/nginx.conf.template
+    environment:
+      - ECOMMERCE_IP_1=${ECOMMERCE_IP_1}
+      - ECOMMERCE_IP_2=${ECOMMERCE_IP_2}
+    command: /bin/bash -c "envsubst < /etc/nginx/nginx.conf.template > /etc/nginx/nginx.conf && exec nginx -g 'daemon off;'"
     restart: always
 
 volumes:
-    nginx_company_profile_data:
+  nginx_ecommerce_data:
