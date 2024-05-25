@@ -46,7 +46,7 @@ Arsitektur proyek ini terdiri dari beberapa instance yang berjalan di GCP. Setia
 Sebelum memulai, pastikan Anda memiliki:
 
 - Akses ke Google Cloud Platform dengan izin yang diperlukan
-- Proyek yang telah disiapkan di GCP
+- Menyalakan Compute Engine API di proyek GCP Anda
 
 ## Mengubah Kuota "In-use IP Addresses" di GCP 
 
