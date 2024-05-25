@@ -14,7 +14,7 @@ services:
       - ./prometheus/prometheus.yml.template:/etc/prometheus/prometheus.yml.template
       - prometheus_data:/prometheus
       - ./start-prometheus.sh:/start-prometheus.sh
-    entrypoint: ["/bin/bash", "/start-prometheus.sh"]
+    entrypoint: ["/bin/sh", "/start-prometheus.sh"]
     restart: unless-stopped
     ports:
       - "9090:9090"

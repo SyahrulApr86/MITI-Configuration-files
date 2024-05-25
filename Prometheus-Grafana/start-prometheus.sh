@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Export variables
 export NODE_EXPORTER_1 NODE_EXPORTER_2 CADVISOR_1 CADVISOR_2 DATABASE_1 DATABASE_2
