@@ -1,0 +1,107 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'docker-host-alpha'
+
+rule_files:
+  - "alert.rules"
+
+scrape_configs:
+  - job_name: 'monitoring-prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['nodeexporter:9100']
+      - targets: ['cadvisor:8080']
+      - targets: ['localhost:9090']
+      - targets: ['pushgateway:9091']
+
+  - job_name: 'company-profile'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${NODE_EXPORTER_1}'
+          - '${NODE_EXPORTER_2}'
+          - '${CADVISOR_1}'
+          - '${CADVISOR_2}'
+
+  - job_name: 'database'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${DATABASE_1}'
+          - '${DATABASE_2}'
+
+  - job_name: 'ecommerce'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${ECOMMERCE_1}'
+          - '${ECOMMERCE_2}'
+          - '${ECOMMERCE_3}'
+          - '${ECOMMERCE_4}'
+
+  - job_name: 'fileserver'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${FILESERVER_1}'
+          - '${FILESERVER_2}'
+
+  - job_name: 'load-balancers'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${LOAD_BALANCER_1}'
+          - '${LOAD_BALANCER_2}'
+          - '${LOAD_BALANCER_3}'
+          - '${LOAD_BALANCER_4}'
+
+  - job_name: 'monitoring-observium'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${MONITORING_OBSERVIUM_1}'
+          - '${MONITORING_OBSERVIUM_2}'
+
+  - job_name: 'monitoring-portainer'
+    honor_timestamps: true
+    scrape_interval: 15s
+    scrape_timeout: 10s
+    metrics_path: /metrics
+    scheme: http
+    static_configs:
+      - targets:
+          - '${MONITORING_PORTAINER_1}'
+          - '${MONITORING_PORTAINER_2}'
+
+alerting:
+  alertmanagers:
+    - scheme: http
+      static_configs:
+        - targets:
+            - 'alertmanager:9093'

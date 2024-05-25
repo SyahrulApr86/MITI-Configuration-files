@@ -111,7 +111,7 @@ networks:
     driver: bridge
 ```
 Kredensial untuk masuk ke LDAP adalah sebagai berikut:
-- **LDAP_ADMIN_USERNAME**: `cn=admin,dc=[domain],dc=com`
+- **LDAP_ADMIN_USERNAME**: `cn=admin,[LDAP_BASE_DN]`
 - **LDAP_ADMIN_PASSWORD**: `[admin_password]`
 - **LDAP_READONLY_USER_USERNAME**: `cn=[readonly_username],dc=[domain],dc=com`
 - **LDAP_READONLY_USER_PASSWORD**: `[readonly_password]`
