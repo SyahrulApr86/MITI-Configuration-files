@@ -9,7 +9,7 @@ services:
     environment:
       - ECOMMERCE_IP_1=${ECOMMERCE_IP_1}
       - ECOMMERCE_IP_2=${ECOMMERCE_IP_2}
-    command: /bin/bash -c "/start-nginx.sh"
+    command: /bin/bash -c "chmod +x /start-nginx.sh && /start-nginx.sh"
     restart: always
 
 volumes:
