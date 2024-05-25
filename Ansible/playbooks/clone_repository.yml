@@ -2,17 +2,6 @@
   hosts: all
   become: true
   tasks:
-    - name: Update all packages using the apt repository
-      apt:
-        update_cache: yes
-      become: true
-
-    - name: Install git
-      apt:
-        name: git
-        state: present
-      become: true
-
     - name: Ensure the destination directory exists
       file:
         path: '/home/apriansyah_syahrul/Mitigas'

@@ -8,4 +8,5 @@ export MONITORING_OBSERVIUM_1 MONITORING_OBSERVIUM_2 MONITORING_PORTAINER_1 MONI
 
 # Substitute variables and run Prometheus
 envsubst < /etc/prometheus/prometheus.yml.template > /etc/prometheus/prometheus.yml
+cat /etc/prometheus/prometheus.yml
 exec /bin/prometheus --config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus --web.console.libraries=/etc/prometheus/console_libraries --web.console.templates=/etc/prometheus/consoles --storage.tsdb.retention.time=200h --web.enable-lifecycle
