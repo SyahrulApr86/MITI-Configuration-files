@@ -5,13 +5,12 @@ services:
     ports:
       - 80:80
     environment:
-      WORDPRESS_DB_HOST: 10.128.0.24
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST}
       WORDPRESS_DB_USER: databaseuser
-      WORDPRESS_DB_PASSWORD: passworddatabaseuser
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD}
       WORDPRESS_DB_NAME: wordpressweb
     volumes:
       - wordpress_web_data:/var/www/html
 
 volumes:
   wordpress_web_data:
-

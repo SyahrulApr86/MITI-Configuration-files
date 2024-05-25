@@ -52,10 +52,10 @@ services:
     ports:
       - 80:80
     environment:
-      WORDPRESS_DB_HOST: [IP database] # IP address dari database server yang akan dihubungkan, bisa menggunakan IP internal atau eksternal jika sudah diatur (direkomendasikan menggunakan IP internal agar lebih aman dan cepat)
-      WORDPRESS_DB_USER: [username database] # username database yang akan digunakan oleh service ini
-      WORDPRESS_DB_PASSWORD: [password database] # password database yang akan digunakan oleh service ini
-      WORDPRESS_DB_NAME: [nama database] # nama database yang akan digunakan oleh service ini
+      WORDPRESS_DB_HOST: ${WORDPRESS_DB_HOST} # IP address dari database server yang akan dihubungkan, bisa menggunakan IP internal atau eksternal jika sudah diatur (direkomendasikan menggunakan IP internal agar lebih aman dan cepat)
+      WORDPRESS_DB_USER: databaseuser # username database yang akan digunakan oleh service ini
+      WORDPRESS_DB_PASSWORD: ${WORDPRESS_DB_PASSWORD} # password database yang akan digunakan oleh service ini
+      WORDPRESS_DB_NAME: wordpressweb # nama database yang akan digunakan oleh service ini
     volumes:
       - wordpress_web_data:/var/www/html
 
@@ -136,9 +136,9 @@ Jika Anda menjalankan instance di GCP, Anda perlu memastikan bahwa port 80 dibuk
     - Navigasi ke **VM Instances**.
     - Klik instance yang ingin Anda akses.
     - Matikan instance jika sedang berjalan.
-    - Klik **Edit**.
-    - Pada bagian **Network tags**, tambahkan tag `allow-http`.
-    - Klik **Save** untuk menyimpan perubahan.
+- Klik **Edit**.
+- Pada bagian **Network tags**, tambahkan tag `allow-http`.
+- Klik **Save** untuk menyimpan perubahan.
 
 ## Konfigurasi Dengan Ansible
 
